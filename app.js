@@ -11,6 +11,8 @@ var ejs = require('ejs');
 var ejsLayout = require('express-ejs-layouts');
 var app = express();
 
+require('./db/mongo');
+
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
@@ -22,7 +24,7 @@ app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
-app.use(app.router);
+app.use(routes);
 app.use(express.static(path.join(__dirname, 'public')));
 
 // development only
@@ -31,10 +33,10 @@ if ('development' == app.get('env')) {
 }
 
 //router
-app.get('/', routes.index);
-app.get('/index', routes.index);
-app.get('/about', routes.about);
-app.get('/material', routes.material);
+//app.get('/', routes.index);
+//app.get('/index', routes.index);
+//app.get('/about', routes.about);
+//app.get('/material', routes.material);
 
 
 //run server
