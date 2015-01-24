@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 
 mongoose.set('debug', true);
 //链接数据库
-mongoose.connect('mongodb://localhost/top_v2', function(err){
+mongoose.connect('mongodb://localhost/blog', function(err){
     if(err){
         console.log(err);
         process.exit(1);

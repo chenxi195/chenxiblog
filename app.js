@@ -32,12 +32,6 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-//router
-//app.get('/', routes.index);
-//app.get('/index', routes.index);
-//app.get('/about', routes.about);
-//app.get('/material', routes.material);
-
 
 //run server
 http.createServer(app).listen(app.get('port'), function(){
