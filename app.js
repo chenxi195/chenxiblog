@@ -7,9 +7,11 @@ var express = require('express');
 var routes = require('./routes');
 var http = require('http');
 var path = require('path');
+var fs = require('fs');
 var ejs = require('ejs');
 var ejsLayout = require('express-ejs-layouts');
 var app = express();
+
 
 require('./db/mongo');
 
@@ -34,6 +36,35 @@ if ('development' == app.get('env')) {
 
 
 //run server
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
-});
+if (require('os').platform() === 'linux') {
+    if (fs.existsSync(path.join(__dirname, 'tmp'))) {
+    } else {
+        fs.mkdirSync(path.join(__dirname, 'tmp'), '777');
+    }
+    var server = http.createServer(app);
+    server.listen('tmp/chenxiblog.socket', function (err) {
+        if (err) {
+            throw err;
+        } else {
+            //修改文件权限
+            setTimeout(function(){
+                fs.chmod('tmp/chenxiblog.socket', '777', function(err) {
+                    if (err) {
+                        throw err;
+                    } else {
+                        console.log('server start' );
+                    }
+                });
+            }, 1000);
+        }
+    });
+} else {
+    var server = http.createServer(app);
+    server.listen(3000, function (err) {
+        if (err) {
+            throw err;
+        } else {
+            console.log("server start on 3000 ...")
+        }
+    });
+}
