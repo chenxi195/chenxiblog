@@ -1,11 +1,10 @@
 @charset "utf-8";
 
 /*rote*/
-.shareouter {position:absolute;width:200px;height:130px;top:100px;}
-#rote {width:130px;height:130px;position:absolute;z-index:1000;left:-132px;-webkit-border-radius:65px;-khtml-border-radius:65px;-moz-border-radius:65px;-o-border-radius:65px;-ms-border-radius:65px;border-radius:65px;top:0;border:1px yellow solid;background:transparent;}
-#rote span {display:block;width:112px;height:40px;line-height:40px;font-family:candara;text-align:center;background:yellow;position:absolute;left:130px;-webkit-border-radius:0 10px 10px 0;-o-border-radius:0 10px 10px 0;-ms-border-radius:0 10px 10px 0;-khtml-border-radius:0 10px 10px 0;-moz-border-radius:0 10px 10px 0;border-radius:0 10px 10px 0;top:50px;color:#333;font-size:16px;}
-.rote {-webkit-transform:rotate(10deg);-moz-transform:rotate(10deg);-khtml-transform:rotate(10deg); -o-transform:rotate(10deg);-ms-transform:rotate(10deg);}
-
+.share_outer {position:fixed;*position: absolute; width:250px;height:130px;top:100px;left: -130px;}
+.share_outer .rote {width: 130px;height: 130px;float: left;border-radius: 65px;border:1px yellow solid;background:transparent;}
+.share_outer .share {float: left;width:112px;height:40px;line-height:40px;font-family:candara;text-align:center;background:yellow;border-radius:0 10px 10px 0;color:#333;font-size:16px;margin: 50px 0 0 -2px;}
+.share_outer.out {-webkit-transform:rotate(10deg);-moz-transform:rotate(10deg);-khtml-transform:rotate(10deg); -o-transform:rotate(10deg);-ms-transform:rotate(10deg);}
 
 /* Common CSS */
 * {margin:0;padding:0;font-size:12px;color:#dedede;font-family:'微软雅黑',Candara,Arial;}
@@ -19,14 +18,11 @@ body {background:#535353 url(../images/body_bg.gif) 0 0 repeat-x;}
 .body {width:960px;margin:5px auto;}
 .shadow {-webkit-box-shadow:0 0 2px 4px #666;;-khtml-box-shadow:0 0 2px 4px #666;;-moz-box-shadow:0 0 2px 4px #666;;box-shadow:0 0 2px 4px #666;}
 .shadow2 {-webkit-box-shadow:inset 0 0 10px #000;-khtml-box-shadow:inset 0 0 10px #000;-moz-box-shadow:inset 0 0 10px #000;}
-
-
 .radius {-khtml-border-radius:10px;-webkit-border-radius:10px;-moz-border-radius:10px;border-radius:10px;}
 .radius2 {-khtml-border-radius:3px;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;}
 .text_shadow {-webkit-text-shadow:2px 2px rgba(0,0,0,0.5);}
 
 /*content_left*/
-
 .con_left {width:300px;height:710px;float:left;background-color:#323232;position:relative;}
 .con_left h1 {height:35px;border-bottom:1px #535353 solid;background:#323232 url(../images/news_icon.gif) 15px 0 no-repeat;font-size:16px;padding-left:62px;line-height:37px;position:absolute;top:95px;left:0;width:238px;}
 .con_left ul {padding:10px;}
@@ -35,8 +31,6 @@ body {background:#535353 url(../images/body_bg.gif) 0 0 repeat-x;}
 .con_left ul li.blog_title a {color:#38a6c9;font-size:14px;}
 .con_left ul li.blog_p {color:#a5a5a5;line-height:15px;}
 .con_left .bottom {height:35px;position:absolute;width:238px;bottom:10px;background:#333;padding-left:62px;}
-
-
 .con_left .top_img {width:440px;height:80px;overflow:hidden;}
 .con_left .top_img img {width:440px;height:80px;overflow:hidden;}
 .con_left ol {padding:3px;}
@@ -49,7 +43,6 @@ body {background:#535353 url(../images/body_bg.gif) 0 0 repeat-x;}
 .con_left ol li dl dd p {margin-top:5px;padding-left:3px;}
 .con_left ol li dl dd p a {color:yellow;}
 .con_left ol li dl dd p:nth-child(2) {color:#ccc;line-height:18px;}
-
 .tu1 {background:url(../images/dif.jpg) -120px -50px no-repeat;}
 .tu2 {background:url(../images/amcham.jpg) -20px -20px no-repeat;}
 .tu3 {background:url(../images/mobo.jpg) -20px -20px no-repeat;}
@@ -94,7 +87,7 @@ body {background:#535353 url(../images/body_bg.gif) 0 0 repeat-x;}
 #switchNum {height:20px;padding-left:17px;}
 #switchNum li {width:6px;height:6px;float:left;margin:5px;}
 #switchNum li a {display:block;width:6px;height:6px;overflow:hidden;background:#555;-khtml-border-radius:3px;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;}
-#switchNum li a.active {background:yellow;}
+#switchNum li.active a {background:yellow;}
 
 .box1 {background:url(../images/dif.jpg) 0 0 no-repeat;}
 .box2 {background:url(../images/mobo.jpg) 0 0 no-repeat;}
