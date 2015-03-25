@@ -1,6 +1,6 @@
 /*Common*/
 body {background:#535353 url(../images/body_bg.gif) 0 0 repeat-x;}
-.top_color, .bottom_color {height:5px;overflow:hidden;position:fixed;width:100%;z-index:1000;}
+.top_color, .bottom_color {height:5px;overflow:hidden;width:100%;}
 .top_color {background:url(../images/top_color.gif) 0 0 repeat-x;top: 0;}
 .bottom_color {background:url(../images/top_color.gif) 0 0 repeat-x;bottom: 0;}
 .head_height {height: 84px;}

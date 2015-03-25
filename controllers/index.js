@@ -7,15 +7,15 @@ var ProfileProxy = require("../proxy/profile").ProfileProxy;
 
 
 function indexView(req, res, next) {
-    res.render('index', { title: 'chenxiblog' });
+    res.render('front/index', { title: 'chenxiblog', layout: 'front/inc/layout.html'});
 }
 
 function aboutView(req, res, next) {
-    res.render('about', { title: 'about' });
+    res.render('about', { title: 'about', layout: 'front/inc/layout.html'});
 }
 
 function materialView(req, res, next) {
-    res.render('material', { title: 'material' });
+    res.render('material', { title: 'material', layout: 'front/inc/layout.html'});
 }
 
 exports.indexView = indexView;
