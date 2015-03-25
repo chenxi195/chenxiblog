@@ -1,0 +1,21 @@
+/*Common*/
+body {background:#f5f5f5 url('/images/admin/bg_line.png') 0 0 repeat-y;font-family: '微软雅黑', Candara, Arial;}
+.head_height {height: 50px;}
+
+/*left_menu*/
+.vertical_head{ width: 200px;background: #ffffff;overflow: hidden;position: fixed;left: 0;top: 50px;}
+.vertical_head .vertical-top dt{font-size: 20px;color: #9b9b9b;padding: 15px 0 10px 30px; margin-bottom: 20px; border-bottom: 2px #f1f1f1 solid;overflow: hidden;}
+.vertical_head .vertical-top dt img,.vertical_head .vertical-top dt span{float: left;}
+.vertical_head .vertical-top dt img{margin-top: 3px;margin-right: 10px;}
+.vertical_head .vertical-top dd{font-size: 14px; margin-bottom: 40px;}
+.vertical_head .vertical-top dd ul {margin: 0;padding: 0;}
+.vertical_head .vertical-top dd ul li {position: relative;list-style-type: none;}
+.vertical_head .vertical-top dd ul li a{color: #000000;display: block;line-height: 20px; padding:8px 0 8px 30px;position: relative;text-decoration: none;}
+.vertical_head .vertical-top dd ul li a span.pop-num {position:absolute;right:12px;width: 25px;height: 20px;border-radius: 4px;background: #6ea8e1;color: #fff;text-align: center;line-height: 20px;font-size: 10px;}
+.vertical_head .vertical-top dd ul li a.active{background: #4680ba;color: #ffffff;}
+.vertical_head .vertical-top dd ul li a.active span.pop-num {background: #fff;color: #4680ba;}
+.vertical_head .vertical-top dd ul li a.active:hover{ background: #6ea8e1;color: #ffffff;}
+.vertical_head .vertical-top dd ul li a:hover{background: #f6f6f6;}
+
+/*content*/
+.m_content {margin-left: 220px;margin-right: 20px;height: 300px;border:1px red solid;}

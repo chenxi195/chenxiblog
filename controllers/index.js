@@ -18,6 +18,11 @@ function materialView(req, res, next) {
     res.render('material', { title: 'material', layout: 'front/inc/layout.html'});
 }
 
+function adminView(req, res ,next){
+  res.render('admin/index', { title: 'Admin Manager', layout: 'admin/inc/layout.html'});
+}
+
 exports.indexView = indexView;
 exports.aboutView = aboutView;
 exports.materialView = materialView;
+exports.adminView = adminView;
