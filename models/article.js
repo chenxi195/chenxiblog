@@ -23,8 +23,7 @@ var ObjectId = Schema.ObjectId;
  */
 var Article = new Schema({
   title: {
-    type: String,
-    index: true
+    type: String
   },
   content:{
     type: String
@@ -37,8 +36,7 @@ var Article = new Schema({
   },
   "type": {
     type: Number,
-    default: 1,
-    index: true
+    default: 1
   },
   createAt: {
     type: Date,

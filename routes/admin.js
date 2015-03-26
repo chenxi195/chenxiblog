@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express();
-var profile = require('../controllers');
+var admin = require('../controllers/admin');
 
-router.get('/',   function (req, res, next) {
-  res.render("admin/index", {layout: "admin/inc/layout", title: "管理首页"});
-});
+router.get('/', admin.adminView);
+router.get('/profile', admin.adminView);
+router.post('/profile', admin.profileAction);
 
 module.exports = router;

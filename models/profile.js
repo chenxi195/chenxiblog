@@ -22,7 +22,7 @@ var Profile = new Schema({
         type: String
     },
     /**
-     * @property 性别 sex
+     * @property 性别 sex 1男 2女
      * @type {String} male female other
      */
     sex: {

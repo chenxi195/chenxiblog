@@ -4,12 +4,12 @@
  */
 var express = require('express');
 var router = express();
-var profile = require('../controllers');
+var controller = require('../controllers/front');
 
 
-router.get('/',  profile.indexView);
-router.get('/index',  profile.indexView);
-router.get('/about',  profile.aboutView);
-router.get('/material',  profile.materialView);
+router.get('/',  controller.indexView);
+router.get('/index',  controller.indexView);
+router.get('/about',  controller.aboutView);
+router.get('/material',  controller.materialView);
 
 module.exports = router;
