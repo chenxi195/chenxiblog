@@ -100,4 +100,4 @@ var Profile = new Schema({
         type:Number
     }
 });
-exports.Profile = mongoose.model("Profile", Profile);
+mongoose.model("Profile", Profile);

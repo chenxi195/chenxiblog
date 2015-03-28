@@ -4,7 +4,7 @@
 'use strict';
 
 var BaseProxy = require("./base").BaseProxy,
-    Profile = require("../models/profile"),
+    Profile = require("../models").Profile,
     ProfileProxy = BaseProxy.factory(Profile);
 
 module.exports.ProfileProxy = new ProfileProxy();

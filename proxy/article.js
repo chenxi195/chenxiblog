@@ -4,7 +4,7 @@
 'use strict';
 
 var BaseProxy = require("./base").BaseProxy,
-  Article = require("../models/article"),
+  Article = require("../models").Article,
   ArticleProxy = BaseProxy.factory(Article);
 
 module.exports.ArticleProxy = new ArticleProxy();

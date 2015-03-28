@@ -24,7 +24,7 @@ function BaseProxy(model) {
     EventEmitter.call(this);
     this.model = model;
 }
-util.inherits(BaseProxy, EventEmitter);
+util.inherits(BaseProxy, EventEmitter); //BaseProxy继承于EventEmitter
 
 /**
  * 新建记录
