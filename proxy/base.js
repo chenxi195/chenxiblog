@@ -284,25 +284,6 @@ BaseProxy.prototype.updateAll = function(condition, update, options, callback) {
 
 /**
  * 分页
- * @param query {Query}
- * @param options {Object}
- * @param callback {function}
- */
-BaseProxy.prototype.paginate = function (query, options, callback) {
-    var obj = this,
-        defer = Q.defer();
-    query.paginate(options, function(err, result) {
-        if (err) {
-            defer.reject(err);
-        } else {
-            defer.resolve(result);
-        }
-    });
-    return defer.promise.nodeify(callback);
-};
-
-/**
- * 分页
  * @param options {Object}
  *  - condition {Object}
  *  - populate {Array}
@@ -344,6 +325,8 @@ BaseProxy.prototype.listAndPaginate = function(options, callback) {
                 query = query.populate(populate[i]);
             }
         }
+        console.log('xxxxxxxxx')
+        console.log(this)
         this.paginate(query, {page:page, perPage:perPage}, function(err, result) {
             if (err) {
                 defer.reject(err);
@@ -353,6 +336,28 @@ BaseProxy.prototype.listAndPaginate = function(options, callback) {
         });
     }
     return defer.promise.nodeify(callback);
+};
+
+
+/**
+ * 分页
+ * @param query {Query}
+ * @param options {Object}
+ * @param callback {function}
+ */
+BaseProxy.prototype.paginate = function (query, options, callback) {
+  var obj = this,
+    defer = Q.defer();
+  console.log('xxxxxx')
+  console.log(query)
+  query.paginate(options, function(err, result) {
+    if (err) {
+      defer.reject(err);
+    } else {
+      defer.resolve(result);
+    }
+  });
+  return defer.promise.nodeify(callback);
 };
 
 /**

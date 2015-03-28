@@ -11,7 +11,11 @@ function adminView(req, res ,next){
 }
 
 function profiles(req, res, next){
-  res.render('admin/profiles', { title: 'Admin Manager', layout: 'admin/inc/layout.html', select: 'profile'});
+  ProfileProxy.listAndPaginate({condition: false})
+    .then(function(list){
+      res.render('admin/profiles', { title: 'Admin Manager', layout: 'admin/inc/layout.html', select: 'profile', list: list});
+    }).catch(next).done();
+
 }
 
 function profile(req, res, next){
