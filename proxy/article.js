@@ -7,4 +7,5 @@ var BaseProxy = require("./base").BaseProxy,
   Article = require("../models").Article,
   ArticleProxy = BaseProxy.factory(Article);
 
+module.exports = new ArticleProxy();
 module.exports.ArticleProxy = new ArticleProxy();

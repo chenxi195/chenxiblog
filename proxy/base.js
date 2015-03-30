@@ -325,8 +325,8 @@ BaseProxy.prototype.listAndPaginate = function(options, callback) {
                 query = query.populate(populate[i]);
             }
         }
-        console.log('xxxxxxxxx')
-        console.log(this)
+//        console.log('xxxxxxxxx')
+//        console.log(this)
         this.paginate(query, {page:page, perPage:perPage}, function(err, result) {
             if (err) {
                 defer.reject(err);
@@ -346,10 +346,7 @@ BaseProxy.prototype.listAndPaginate = function(options, callback) {
  * @param callback {function}
  */
 BaseProxy.prototype.paginate = function (query, options, callback) {
-  var obj = this,
-    defer = Q.defer();
-  console.log('xxxxxx')
-  console.log(query)
+  var obj = this, defer = Q.defer();
   query.paginate(options, function(err, result) {
     if (err) {
       defer.reject(err);

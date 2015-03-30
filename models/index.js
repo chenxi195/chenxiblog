@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+require('../proxy/query-paginate');
 function loadModel(modelName) {
   return mongoose.model(modelName);
 }
