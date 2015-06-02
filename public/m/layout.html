@@ -1,0 +1,65 @@
+<html>
+<head>
+    <meta content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta charset="UTF-8">
+    <title>演艺邦</title>
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/m.css">
+    <script type="text/javascript" src="http://123.57.221.56:8080/ParaMapJs.do?userCid=gm4"></script>
+    <script src="js/jquery.min.js"></script>
+</head>
+<body>
+<section class="outer" id="outer">
+    <div class="page page1" id="page1" style="background: indianred">
+        <header>
+            <div class="fl title_box"><span class="title">我的首页</span></div>
+            <div class="fr remind_box" ><a href="remind.html" class="mail"><span class="icon-envelope"></span><em class="icon-circle"></em></a></div>
+            <div class="fr search_link_box"><a href="search.html" class="search_link"><span class="icon-search"></span></a></div>
+        </header>
+        <div class="head_height"></div>
+        <div class="content">
+
+        </div>
+    </div>
+    <div class="page page2 swipeLeftIn" id="page2" style="background: green">
+        <header>
+            <div class="fl back_box"><a href="#" class="back_link"><span class="icon-chevron-left"></span></a></div>
+            <div class="fl title_box"><span class="title">详情页</span></div>
+            <div class="fr"><a href="#" class="mail"><span class="icon-reorder"></span></a></div>
+        </header>
+        <div class="head_height"></div>
+        <div class="content">
+
+        </div>
+    </div>
+</section>
+
+
+<div class="head_height"></div>
+<nav id="navMenu" class="nav_menu">
+    <a href="index.html">社区</a>
+    <a href="last_contacts.html">IM</a>
+    <a href="#">发布</a>
+    <a href="filter.html">业招</a>
+    <a href="profile.html">我的</a>
+</nav>
+
+<script>
+    $('.back_link').click(function(e){
+
+        $('#page2').addClass('swipeRightOut');
+
+        e.preventDefault();
+    })
+</script>
+
+<!--<script src="js/topTitleModule.js"></script>-->
+<!--<script src="js/topRemindModule.js"></script>-->
+<!--<script src="js/topSearchModule.js"></script>-->
+<!--<script src="js/baseController.js"></script>-->
+<script src="js/indexController.js"></script>
+</body>
+</html>

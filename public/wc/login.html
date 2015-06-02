@@ -7,8 +7,8 @@
 <meta charset="UTF-8">
 <title>演艺邦-微信公众号</title>
 <link rel="stylesheet" href="css/style.css">
-<script type="text/javascript" src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
-<script type="text/javascript" src="js/config.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/config.js"></script>
 </head>
 <body>
 <section class="pub">
@@ -26,7 +26,7 @@
 					<span class="send_code" id="sendCode">发送验证码</span>
 					<span class="send_code retry" id="retryCode" style="display:none"><em id="time">60</em>秒后重试</span>
 				</div>
-				<input type="submit" class="submit_btn" value="提交"/>
+				<a class="submit_btn">提交</a>
 				<a href="p_login.html" class="p_login_url">密码登录</a>
 			</div>
 		</form>
@@ -36,7 +36,8 @@
 $('#sendCode').on('click', function(){
     var tel = $('input[name="mobile"]').val();
     if(tel && !isNaN(tel) && tel.length === 11){
-        HeadStr.get($, '/get-code', {mobile: tel}, function(data){
+        //发送验证码接口TODO
+        HeadStr.get($, '', {mobile: tel}, function(data){
             $('#retryCode').show();
             $('#sendCode').hide();
             var time = HeadStr.sendCodeTime;
@@ -51,7 +52,6 @@ $('#sendCode').on('click', function(){
                 }
                 $('#time').html(time);
             }, 1000);
-
         });
     }else{
         HeadStr.popMsg('电话号码有误');
@@ -72,10 +72,6 @@ $('#form').submit(function(){
 	    }else{
 	    	HeadStr.loadingStart();
 	    	return true;
-	        // var url = '';
-	        // HeadStr.post($, url, {mobile: tel, code: code}, function(data){
-	        //     window.location.href = window.location.protocol+'//'+window.location.host+'/m/cf/'+HeadStr.teamId+'/'+HeadStr.activityId+'/pay';
-	        // });
 	    }
 	}else{
 		HeadStr.popMsg('请将信息填写完整');
@@ -83,5 +79,7 @@ $('#form').submit(function(){
 	}
 });
 </script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/wx.js"></script>
 </body>
 </html>

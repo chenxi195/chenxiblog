@@ -12,4 +12,10 @@ router.get('/index',  controller.indexView);
 router.get('/about',  controller.aboutView);
 router.get('/material',  controller.materialView);
 
+
+
+//wc
+router.get('/list',  controller.wcList);
+
+
 module.exports = router;

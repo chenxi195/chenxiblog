@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>演艺邦-微信公众号</title>
 <link rel="stylesheet" href="css/style.css">
-<script type="text/javascript" src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/config.js"></script>
 </head>
 <body>
@@ -24,7 +24,7 @@
 					<label>密码:</label>
 					<input type="password" name="password" placeholder="密码"/>
 				</div>
-				<input type="submit" class="submit_btn" value="提交"/>
+                <a class="submit_btn">提交</a>
 				<a href="login.html" class="p_login_url">快速登录</a>
 			</div>
 		</form>
@@ -49,5 +49,7 @@ $('#form').submit(function(){
 	}
 });
 </script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="js/wx.js"></script>
 </body>
 </html>

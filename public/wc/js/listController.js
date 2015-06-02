@@ -1,8 +1,11 @@
 var  ListModule = angular.module('ListModule', ['ngSanitize', 'ngTouch']);
 
 function ListController($scope, $http, $location, $sanitize){
-	console.log(data)
-	$scope.items = data.l;
+    HeadStr.loadPageList($scope, $http, '/list', {page:1}, null);
+//    $http.get('/list').success(function(data, status, headers, config){
+//        console.log(data)
+//    });
+//	$scope.items = data.l;
 	$scope.contentStatus = function(img){
 		if(img){
 			return 1;
