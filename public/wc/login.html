@@ -1,0 +1,87 @@
+<html>
+<head>
+<meta content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="telephone=no" name="format-detection">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<meta charset="UTF-8">
+<title>演艺邦-微信公众号</title>
+<link rel="stylesheet" href="css/style.css">
+<script type="text/javascript" src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" src="js/config.js"></script>
+</head>
+<body>
+<section class="pub">
+	<div class="pub_box">
+		<form action="" method="post" id="form">
+			<div class="pub_title">快速登录</div>
+			<div class="pub_login">
+				<div class="pub_label">
+					<label>手机号:</label>
+					<input type="tel" name="mobile" placeholder="请输入手机号"/>
+				</div>
+				<div class="pub_label">
+					<label>验证码:</label>
+					<input type="text" name="code" placeholder="验证码"/>
+					<span class="send_code" id="sendCode">发送验证码</span>
+					<span class="send_code retry" id="retryCode" style="display:none"><em id="time">60</em>秒后重试</span>
+				</div>
+				<input type="submit" class="submit_btn" value="提交"/>
+				<a href="p_login.html" class="p_login_url">密码登录</a>
+			</div>
+		</form>
+	</div>
+</section>
+<script>
+$('#sendCode').on('click', function(){
+    var tel = $('input[name="mobile"]').val();
+    if(tel && !isNaN(tel) && tel.length === 11){
+        HeadStr.get($, '/get-code', {mobile: tel}, function(data){
+            $('#retryCode').show();
+            $('#sendCode').hide();
+            var time = HeadStr.sendCodeTime;
+            var timer = setInterval(function(){
+                time--;
+                if(time < 1){
+                    time = 0;
+                    clearInterval(timer);
+                    $('#retryCode').hide();
+                    $('#sendCode').show();
+                    time = 60;
+                }
+                $('#time').html(time);
+            }, 1000);
+
+        });
+    }else{
+        HeadStr.popMsg('电话号码有误');
+    }
+});
+
+$('#form').submit(function(){
+	var tel = $('input[name="mobile"]').val();
+	var code = $('input[name="code"]').val();
+
+	if(tel && code){
+	    if(isNaN(tel) && tel.length !== 11){
+	        HeadStr.popMsg('电话号码有误');
+	        return false;
+	    }else if(isNaN(code) && code.length !== 6){
+	        HeadStr.popMsg('验证码有误');
+	        return false;
+	    }else{
+	    	HeadStr.loadingStart();
+	    	return true;
+	        // var url = '';
+	        // HeadStr.post($, url, {mobile: tel, code: code}, function(data){
+	        //     window.location.href = window.location.protocol+'//'+window.location.host+'/m/cf/'+HeadStr.teamId+'/'+HeadStr.activityId+'/pay';
+	        // });
+	    }
+	}else{
+		HeadStr.popMsg('请将信息填写完整');
+		return false;
+	}
+});
+</script>
+</body>
+</html>

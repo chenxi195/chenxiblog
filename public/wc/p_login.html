@@ -1,0 +1,53 @@
+<html>
+<head>
+<meta content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="telephone=no" name="format-detection">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<meta charset="UTF-8">
+<title>演艺邦-微信公众号</title>
+<link rel="stylesheet" href="css/style.css">
+<script type="text/javascript" src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" src="js/config.js"></script>
+</head>
+<body>
+<section class="pub">
+	<div class="pub_box">
+		<form action="" method="post" id="form">
+			<div class="pub_title">登录</div>
+			<div class="pub_login">
+				<div class="pub_label">
+					<label>账 户:</label>
+					<input type="tel" name="mobile" placeholder="演艺邦ID/手机号"/>
+				</div>
+				<div class="pub_label">
+					<label>密码:</label>
+					<input type="password" name="password" placeholder="密码"/>
+				</div>
+				<input type="submit" class="submit_btn" value="提交"/>
+				<a href="login.html" class="p_login_url">快速登录</a>
+			</div>
+		</form>
+	</div>
+</section>
+<script>
+$('#form').submit(function(){
+	var tel = $('input[name="mobile"]').val();
+	var password = $('input[name="password"]').val();
+
+	if(tel && password){
+	    if(isNaN(tel) && tel.length !== 11){
+	        HeadStr.popMsg('电话号码有误');
+	        return false;
+	    }else{
+	    	HeadStr.loadingStart();
+	    	return true;
+	    }
+	}else{
+		HeadStr.popMsg('请将信息填写完整');
+		return false;
+	}
+});
+</script>
+</body>
+</html>
