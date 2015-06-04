@@ -101,8 +101,8 @@ MainFrame.prototype.init = function() {
 // main panel
 function MainPanel(tpl) {
     this.tpl = tpl;
-    this.container;
-    this.firstPanel;
+	this.container;
+	this.firstPanel;
     this.setStyle = function(ctx) {
         MainPanelSetStyle.call(this, ctx);
     };

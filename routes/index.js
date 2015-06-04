@@ -16,6 +16,8 @@ router.get('/material',  controller.materialView);
 
 //wc
 router.get('/list',  controller.wcList);
+router.get('/postList',  controller.postList);
+
 
 
 module.exports = router;
