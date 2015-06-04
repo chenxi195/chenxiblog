@@ -17,7 +17,7 @@ function showUserList(data) {
 function showPostList(data) {
     var list = new PostList(TPL.list);
     list.data = data.data.ctx;
-    list.init();
+	list.init();
 }
 
 

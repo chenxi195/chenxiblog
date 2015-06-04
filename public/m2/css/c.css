@@ -103,6 +103,7 @@ nav a {float: left;width: 20%;height: 100%;line-height: 50px;text-align: center;
 .social_list .body {padding: 7.77px;color: #999;font-size: .9em;}
 .social_user {overflow: hidden;padding: 7.77px 0;}
 .su_img {width: 40px; height: 40px;float: left;margin-right: 7.77px;background: #ccc;}
+.su_img img {width: 100%;height: 100%;}
 .su_name {margin-left: 47.77px;}
 .su_time {color: #ccc;font-size: .8em;}
 .social_content {line-height: 1.4;}

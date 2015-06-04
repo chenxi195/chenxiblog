@@ -6,6 +6,7 @@ window.onload = main;
 
 function main(){
 	$.init(TPL);
+	$.mainPanel.defaultLoad();
 }
 
 function MainFrame(){
@@ -22,11 +23,12 @@ MainFrame.prototype.init = function(tpl){
 	this.navPanel = new NavPanel(this.tpl.navPanel);
 	this.navPanel.init();
 
-	this.tabPanel = new TabPanel(this.tpl.tabPanel);
-	this.tabPanel.init();
-
 	this.mainPanel = new MainPanel(this.tpl.mainPanel);
 	this.mainPanel.init();
+
+	this.tabPanel = new TabPanel(this.tpl.tabPanel);
+	this.tabPanel.panelContainer = this.mainPanel.panelContainer;
+	this.tabPanel.init();
 
 	Bridge(this);
 }
@@ -35,23 +37,26 @@ function Bridge(api){
 	api.postList = function(ctx) {
 		c.ajax('GET', ctx, function(data) {
 			$.data = data;
-			showPostList.call(this, $.data.postList);
+			showPostList.call(this, $.data);
 		});
 	};
+	api.switchTab = function(ctx, action) {
+		this.tabPanel.switchTab(ctx, action);
+	}
 }
 
 // main panel
 function MainPanel(tpl) {
 	this.tpl = tpl;
 	this.container;
-	this.firstPanel;
+	this.panelContainer;
 	this.setStyle = function(ctx) {
 		MainPanelSetStyle.call(this, ctx);
 	};
 }
 MainPanel.prototype.init = function() {
 	this.container = c._(this.tpl.id);
-	this.firstPanel = this.container.getElementsByTagName("div")[0];
+	this.panelContainer = this.container.getElementsByTagName("div")[0];
 }
 MainPanel.prototype.defaultLoad = function() {
 	if (this.tpl.defaultLoad.style != null) {
@@ -112,6 +117,10 @@ function TabPanel(tpl){
 	this.tpl = tpl;
 	this.container;
 	this.items = [];
+	this.currTab;
+	this.switchTab = function(id, action) {
+		TabSwitchItem.call(this, id, action);
+	}
 }
 
 TabPanel.prototype.init = function(){
@@ -125,9 +134,24 @@ TabPanel.prototype.init = function(){
 		var item = document.createElement('a');
 		item.id = itemId;
 		item.innerHTML = itemText;
+		item.value = itemTpl.onClick;
+		item.onclick = function() {
+			eval(this.value);
+		}
 
 		this.container.appendChild(item);
 		this.items[i] = item;
 	}
+}
+
+function TabSwitchItem(id, action, items) {
+	this.currTab = c._(id);
+	for(var i = 0; i < this.items.length; i++) {
+		var item = this.items[i];
+		item.className = "";
+	}
+	this.currTab.className = "curr";
+	this.panelContainer.innerHTML = "";
+	eval(action);
 }
 

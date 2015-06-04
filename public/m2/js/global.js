@@ -14,7 +14,8 @@ var c = {};
 		oAjax.onreadystatechange=function (){
 			if(oAjax.readyState==4){
 				if(oAjax.status==200){
-					callback(oAjax.responseText);
+					var data = eval('('+oAjax.responseText+')');
+					callback(data);
 				}else{
 					if(failBack){
 						failBack();
