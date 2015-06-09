@@ -12,11 +12,12 @@ router.get('/index',  controller.indexView);
 router.get('/about',  controller.aboutView);
 router.get('/material',  controller.materialView);
 
-
-
 //wc
-router.get('/list',  controller.wcList);
 router.get('/postList',  controller.postList);
+router.get('/postInfo',  controller.postInfo);
+router.get('/userList', controller.userList);
+router.get('/jobType', controller.jobType);
+router.get('/userDetail', controller.userDetail);
 
 
 

@@ -24,6 +24,7 @@ header {height: 50px;background: #ccc;position: fixed;left: 0;top: 0;width: 100%
 .search {right: 35px;}
 .remind em {position: absolute; right: 5px;top: -3px;color: red;width: 4px; height: 4px;font-size: .1em;}
 .content {position: relative;}
+#panelContainer {position: relative;}
 
 
 .page1 {z-index: 999;}

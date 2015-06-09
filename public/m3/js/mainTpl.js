@@ -9,7 +9,7 @@ TPL.mainPanel = {
 	id: 'panelContainer',
 	style: "tabAndNav",
 	defaultLoad: {
-		load: '$.postList("/postList")'
+		load: "$.jobs(\'/jobType\')"
 	}
 }
 
@@ -26,25 +26,25 @@ TPL.tabPanel = {
 			id: 'tab2',
 			title: '2',
 			text: 'IM',
-			onClick: '$.switchTab("tab2", "$.postList(\'/postList\')")'
+			onClick: '$.switchTab("tab2", "$.userList(\'/userList\')")'
 		},
 		{
 			id: 'tab3',
 			title: '3',
 			text: '',
-			onClick: '$.switchTab("tab3", "$.postList(\'/postList\')")'
+			onClick: '$.UpInSubTab("tabSubContainer")'
 		},
 		{
 			id: 'tab4',
 			title: '4',
 			text: '发现',
-			onClick: '$.switchTab("tab4", "$.postList(\'/postList\')")'
+			onClick: '$.switchTab("tab4", "$.foundList(\'/postList\')")'
 		},
 		{
 			id: 'tab5',
 			title: '5',
 			text: '我的',
-			onClick: '$.switchTab("tab5", "$.postList(\'/postList\')")'
+			onClick: '$.switchTab("tab5", "$.userDetail(\'/userDetail\')")'
 		}
 	]
 }

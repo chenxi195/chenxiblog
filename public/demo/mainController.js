@@ -17,7 +17,8 @@ function main() {
 }
 
 // for web
-function forBridge(a, href) {
+function forBridge(a, href, id) {
+//  var
     eval(href);
 }
 
