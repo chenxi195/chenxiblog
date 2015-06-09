@@ -1,7 +1,11 @@
 TPL.list = {
 	id: "tab1Container",
-  avatarOnClick: '$.postDetail("/postInfo")'
+  avatarOnClick: '$.postDetail("/postInfo")',
+  loadUrl: '/postList',
+  isPaginate: true,
+  paginateType: 1  //1 点击加载更多
 }
+
 TPL.foundList = {
   id: "tab4Container",
   avatarOnClick: '$.postDetail("/postInfo")'

@@ -41,22 +41,52 @@ function showSlideInput(ctx){
 // post list
 function PostList(tpl) {
 	this.tpl = tpl;
-	this.container = c._(this.tpl.id);
+  this.id = this.tpl.id;
+	this.container = c._(this.id);
 	this.data;
+  this.listContainer;
+  this.paginateContainer;
+  this.isPaginate = this.tpl.isPaginate || false;
+  this.paginateType = this.tpl.paginateType || 1;
+  this.page = 0;
+  this.loadUrl = this.tpl.loadUrl;
 }
 PostList.prototype.init = function(data) {
 	this.data = data;
-	var postList = this.data.postList;
-  var tplUri = this.tpl.avatarOnClick;
-	console.log(postList);
+  var id = this.id;
+  var listBox = document.createElement('div');
+  var paginateBox = document.createElement('div');
+  listBox.id = id + '-listBox';
+  paginateBox.id = id + '-paginateBox';
+  paginateBox.className = 'paginate_box';
+  this.container.appendChild(listBox);
+  this.container.appendChild(paginateBox);
+  this.listContainer = c._(id + '-listBox');
+  this.paginateContainer = c._(id + '-paginateBox');
 
-	for(var i=0, ii=postList.length; i<ii; i++){
+  this.loadList(this.page);
+
+  if(this.isPaginate){
+    var paginate = new Paginate(this);
+    paginate.init();
+  }
+
+}
+
+PostList.prototype.loadList = function(page){
+  var postList = this.data.postList;
+  var tplUri = this.tpl.avatarOnClick;
+  var pageListBox = document.createElement('div');
+  pageListBox.id = this.id + '-page-' + page;
+  this.listContainer.appendChild(pageListBox);
+  this.pageListBox = c._(this.id + '-page-' + page);
+
+  for(var i=0, ii=postList.length; i<ii; i++){
 		var post = postList[i];
 		var div = document.createElement("div");
-		div.id = "list"+i;
-		div.className = 'social_list';
+		div.id = this.id + '-listItem-'+i;
 		div.innerHTML = Sample.postSample(i, post);
-		this.container.appendChild(div);
+		this.pageListBox.appendChild(div);
 
     c._('postAvatar'+i).onclick = function(){
       var params = '?postId='+post.id;
@@ -64,6 +94,7 @@ PostList.prototype.init = function(data) {
       forBridge(null, uri);
     }
 	}
+
 }
 
 //post detail
@@ -88,6 +119,7 @@ function UserList(tpl){
 }
 UserList.prototype.init = function(data){
   this.data = data;
+  var id = this.tpl.id;
   var userList = this.data.userList;
   var tplUri = this.tpl.avatarOnClick;
 
@@ -108,7 +140,6 @@ UserList.prototype.init = function(data){
 }
 
 //user detail
-
 function UserDetail(tpl){
   this.tpl = tpl;
   this.container = c._(this.tpl.id);
@@ -226,8 +257,6 @@ SlideMenu.prototype.init = function(data){
       this.thirdContainer.appendChild(dayDiv);
     }
   }
-
-
 }
 SlideMenu.prototype.showSubData = function(id, items){
   var index = id.split('slideLeftItem')[1];
@@ -282,8 +311,6 @@ SlideMenu.prototype.getMonthsByYear = function(year){
 
 
 
-
-
 function matchSubData(index, data){
   for(var i=0, ii=data.length; i<ii; i++){
     if(i == index){
@@ -314,6 +341,33 @@ SlideInput.prototype.init = function(ctx){
     inputContent.blur();
     //TODO post ajax
   }
+}
+
+function Paginate(obj){
+  this.obj = obj;
+  this.container = this.obj.paginateContainer;
+  this.type = this.obj.paginateType;
+  this.loadUrl = this.obj.loadUrl;
+  this.page = this.obj.page;
+}
+
+Paginate.prototype.init = function(){
+  var scope = this;
+  if(this.type == 1){
+    var div = document.createElement('div');
+    div.id = 'paginate';
+    div.className = 'load_more';
+    div.innerHTML = '点击加载更多...';
+    div.onclick = function(){
+      scope.page++;
+      var nextPageUrl = scope.loadUrl+'?page='+scope.page;
+      c.ajax('GET', nextPageUrl, function(data){
+        scope.obj.loadList(scope.page);
+      })
+    }
+    this.container.appendChild(div);
+  }
+
 
 }
 

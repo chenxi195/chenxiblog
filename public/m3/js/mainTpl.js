@@ -9,7 +9,7 @@ TPL.mainPanel = {
 	id: 'panelContainer',
 	style: "tabAndNav",
 	defaultLoad: {
-		load: "$.jobs(\'/jobType\')"
+		load: "$.postList(\'/postList?page=0\')"
 	}
 }
 

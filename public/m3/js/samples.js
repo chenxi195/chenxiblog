@@ -5,7 +5,7 @@ var Sample = {
   },
   postSample : function(i, post){
     var html =
-      '<div class="social_list" id="post'+i+'">'+
+      '<div class="social_list">'+
         '<div class="head"><p><span class="tags"><var>行业1&amp;活动1</var><em class="icon-tag"></em></span><span>晒业绩</span></p></div>'+
         '<div class="body">'+
           '<div class="social_user">' +
