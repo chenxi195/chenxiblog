@@ -1,1 +1,0 @@
-$.data.login = {userCid: "gm1", sid: "123"}

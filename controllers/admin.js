@@ -13,6 +13,7 @@ function adminView(req, res ,next){
 function profiles(req, res, next){
   ProfileProxy.listAndPaginate({condition: false})
     .then(function(list){
+      console.log(list);
       res.render('admin/profiles', { title: 'Admin Manager', layout: 'admin/inc/layout.html', select: 'profile', list: list});
     }).catch(next).done();
 
@@ -23,7 +24,7 @@ function profile(req, res, next){
   res.render('admin/profile', { title: 'Admin Manager', layout: 'admin/inc/layout.html', select: 'profile'});
 }
 
-function profileAction(req, res, next){
+function profileAction(rerq, res, next){
   var body = req.body;
   ProfileProxy.add(body)
     .then(function(result){

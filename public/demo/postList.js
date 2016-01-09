@@ -1,1 +1,0 @@
-$.data.postList = {userC:{isGM:1},msgCount:{newLike:5},statusCode:0,statusMsgs:["success",""],data:{ThisViewLink:"data",ctx:{postList:[{uid:1,title:"title 1",content:"content 1"},{uid:2,title:"name 2",content:"intro 2"}]}}}
