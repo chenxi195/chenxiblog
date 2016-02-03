@@ -342,6 +342,34 @@ function userDetail(req, res, next){
   res.json(data);
 }
 
+
+function categoryList(req, res, next){
+  var data = [];
+  var mock = function(id, name, parent){
+    return {
+      id: id,
+      name: name,
+      item: [],
+      parent: parent
+    }
+  };
+
+  for(var i=0; i<8; i++){
+    data[i] = mock(i, 'categoryName-'+i, null);
+
+    for(var j=0; j<4; j++){
+      data[i].item[j] = mock(i+'-'+j, 'child-level1-name-'+j, i);
+
+      for(var v= 0; v<2; v++){
+        data[i].item[j].item[v] = mock(i+'-'+j+'-'+v, 'child-level2-name-'+v, i+'-'+j);
+      }
+    }
+  }
+
+  res.json(data);
+
+}
+
 exports.indexView = indexView;
 exports.aboutView = aboutView;
 exports.materialView = materialView;
@@ -350,3 +378,4 @@ exports.postInfo = postInfo;
 exports.userList = userList;
 exports.jobType = jobType;
 exports.userDetail = userDetail;
+exports.categoryList = categoryList;

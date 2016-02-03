@@ -11,6 +11,7 @@ router.get('/',  controller.indexView);
 router.get('/index',  controller.indexView);
 router.get('/about',  controller.aboutView);
 router.get('/material',  controller.materialView);
+router.get('/categoryList', controller.categoryList);
 
 //wc
 router.get('/postList',  controller.postList);
