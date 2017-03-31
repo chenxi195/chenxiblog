@@ -3,15 +3,17 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node app.js"
+    "start": "node app"
   },
   "dependencies": {
-    "ejs": "*",
-    "eventproxy": "*",
-    "express": "3.5.0",
-    "express-ejs-layouts": "*",
-    "jade": "*",
-    "mongoose": "3.8.x",
-    "q": "*"
+    "body-parser": "^1.17.1",
+    "connect-redis": "^3.2.0",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.2",
+    "express-session": "^1.15.2",
+    "morgan": "^1.8.1",
+    "nunjucks": "^3.0.0",
+    "redis": "^2.7.1",
+    "serve-favicon": "^2.4.2"
   }
 }

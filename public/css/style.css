@@ -3,8 +3,8 @@ body {background-color:#f5f5f5;font-family: '微软雅黑', Candara, Arial;}
 
 /*header*/
 .top_color, .bottom_color {height:5px;overflow:hidden;width:100%;z-index: 1040;}
-.top_color {background:url(../images/top_color.gif) 0 0 repeat-x;}
-.bottom_color {background:url(../images/top_color.gif) 0 0 repeat-x;bottom:0;}
+.top_color {background:url(../imgs/top_color.gif) 0 0 repeat-x;}
+.bottom_color {background:url(../imgs/top_color.gif) 0 0 repeat-x;bottom:0;}
 .top_style {background:#080808 url('/images/top_color.gif') 0 bottom repeat-x;border-bottom:none;}
 .top_style .navbar-nav li.active a {background:rgba(0,0,0,0.6);}
 .c_header {background: url('/images/bg.png');}
