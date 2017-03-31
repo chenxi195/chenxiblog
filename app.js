@@ -15,7 +15,7 @@ var redis = require('redis');
 var config = require('./config/config');
 var fs = require('fs');
 var http = require('http');
-var routes = require('./routes/index');
+var routes = require('./routes');
 
 var RedisStore = require('connect-redis')(expressSession);
 var rClient = redis.createClient(config.redis.port, config.redis.host, {auth_pass: config.redis.auth_password});
@@ -24,7 +24,6 @@ var sessionStore = new RedisStore({client: rClient});
 rClient.on("error", function (err) {
     console.log('redisError:'+err);
 });
-
 
 var app = express();
 
