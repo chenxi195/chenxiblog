@@ -95,7 +95,7 @@ if (require('os').platform() === 'linux') {
         }
     });
 } else {
-    var port = process.env.PORT || '3000';
+    var port = process.env.PORT || '3111';
     var server = http.createServer(app);
 
     server.listen(port);
