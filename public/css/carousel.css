@@ -43,7 +43,7 @@ a:hover {text-decoration: none;}
   overflow: hidden;
 }
 .first-slide {
-  background: url('../imgs/bg.jpg') center center no-repeat;
+  background: url('../imgs/bg2.jpg') center center no-repeat;
 }
 
 .marketing .col-lg-4 {
@@ -95,4 +95,27 @@ a:hover {text-decoration: none;}
   .featurette-heading {
     font-size: 50px;
   }
+
+  .featurette-image {display: block;}
+  /*.kc .thumbnail img {*/
+    /*height: 107px;*/
+  /*}*/
 }
+
+@media (min-width: 320px) and (max-width: 768px) {
+  .featurette-image {display: none;}
+  .logo2 {width: 200px;}
+  /*.kc .thumbnail img {*/
+    /*height: auto;*/
+  /*}*/
+}
+
+.navbar-inverse {
+  background: rgba(0,0,0,0);
+  border:none;
+}
+.name-title {
+  font-size: 18px;
+}
+
+
