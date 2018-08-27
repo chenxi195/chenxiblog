@@ -6,7 +6,9 @@
   export default {
     methods: {
       handleClick () {
-        alert(1)
+        this.$axios.get('/getInfo')
+          .then(res =>{console.log(res)})
+          .catch(e=>{console.log(e)})
       }
     }
   }

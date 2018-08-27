@@ -1,3 +1,5 @@
+let isDev = !(process.env.NODE_ENV === 'production');
+
 module.exports = {
   srcDir: __dirname,
   head: {
@@ -24,23 +26,22 @@ module.exports = {
     '@nuxtjs/axios'
   ],
   axios: {
-    baseURL: "http://127.0.0.1:3110/api",
+    // baseURL: "http://localhost:3000/api",
     browserBaseURL: "/api"
   },
   build: {
     extractCSS: true,
-    publicPath: '/_nuxt/',
+    // CDN 地址, 当运行 nuxt build 时，会将.nuxt/dist/目录的内容上传到CDN， '/_nuxt/'为默认值
+    // publicPath: '/_nuxt/',
     babel: {
       presets: [
-        ['vue-app',
-          {
-            useBuiltIns: true,
-            targets: {
-              ie: 9,
-              uglify: true
-            }
+        ['vue-app', {
+          useBuiltIns: true,
+          targets: {
+            ie: 9,
+            uglify: true
           }
-        ]
+        }]
       ]
     },
     vendor: ['babel-polyfill', 'axios', 'element-ui']
