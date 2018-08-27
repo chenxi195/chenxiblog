@@ -5,20 +5,27 @@
   "description": "chenxiblog",
   "scripts": {
     "start": "node ./bin/www",
-    "build": "webpack"
+    "build": "nuxt build -c nuxt/nuxt.config.js"
   },
   "keywords": [
     "chenxiblog"
   ],
-  "author": "chenxi195",
-  "license": "ISC",
   "dependencies": {
+    "@nuxtjs/axios": "^5.3.1",
+    "babel-polyfill": "^6.26.0",
     "body-parser": "^1.18.2",
     "cookie-parser": "^1.4.3",
     "debug": "^3.1.0",
+    "element-ui": "^2.4.6",
     "express": "^4.16.2",
     "morgan": "^1.9.0",
-    "nunjucks": "^3.0.1",
+    "nuxt": "^1.4.2",
     "serve-favicon": "^2.4.5"
-  }
+  },
+  "devDependencies": {
+    "less": "^2.7.2",
+    "less-loader": "^4.0.3"
+  },
+  "author": "chenxi195",
+  "license": "ISC"
 }

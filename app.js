@@ -4,29 +4,28 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const nunjucks = require('nunjucks');
 const routes = require('./routes/index');
 const app = express();
+const {Nuxt, Builder} = require('nuxt');
 
-// nunjucks配置
-const env = nunjucks.configure('views', {
-  autoescape: true,
-  express: app
-});
-
-//html模版配置
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'html');
-
-app.use(favicon(path.join(__dirname, 'public', 'fav.ico')));
+app.use(favicon(path.join(__dirname, 'fav.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json({
   limit: '20488kb'
 }));
 app.use(bodyParser.urlencoded({ extended: false,limit: '20488kb'}));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/', routes);
+app.use('/api', routes);
+
+let nuxtConfig = require('./nuxt/nuxt.config.js');
+nuxtConfig.dev = !(process.env.NODE_ENV === 'production');
+const nuxt = new Nuxt(nuxtConfig);
+if (nuxtConfig.dev) {
+  const builder = new Builder(nuxt);
+  builder.build();
+}
+
+app.use(nuxt.render);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

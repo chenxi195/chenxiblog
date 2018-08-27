@@ -1,2 +1,9 @@
 node_modules/**
-.idea
+.idea/**
+/npm-debug.log
+.nuxt
+dist
+
+# OS or Editor folders
+.DS_Store
+Thumbs.db
