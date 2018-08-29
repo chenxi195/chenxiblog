@@ -19,7 +19,9 @@
     "element-ui": "^2.4.6",
     "express": "^4.16.2",
     "morgan": "^1.9.0",
+    "mysql2": "^1.6.1",
     "nuxt": "^1.4.2",
+    "sequelize": "^4.38.0",
     "serve-favicon": "^2.4.5"
   },
   "devDependencies": {
