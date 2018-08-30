@@ -4,6 +4,9 @@
 
 <script>
   export default {
+    mounted () {
+      alert(1);
+    },
     methods: {
       handleClick () {
         this.$axios.get('/getInfo')

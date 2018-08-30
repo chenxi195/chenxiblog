@@ -1,3 +1,7 @@
+let isDev = !(process.env.NODE_ENV === 'production');
+let baseUrl = isDev ? 'http://localhost:3000/api' : 'http://chenxiblog.com/api';
+let publicPath = isDev ? '/_nuxt/' : '/_nuxt/';
+
 module.exports = {
   srcDir: __dirname,
   head: {
@@ -15,6 +19,9 @@ module.exports = {
   },
   css: [
     'element-ui/lib/theme-chalk/index.css',
+    'quill/dist/quill.snow.css',
+    'quill/dist/quill.bubble.css',
+    'quill/dist/quill.core.css',
     {src: '~/assets/css/global.less', lang: 'less'}
   ],
   loading: {
@@ -24,13 +31,13 @@ module.exports = {
     '@nuxtjs/axios'
   ],
   axios: {
-    // baseURL: "http://localhost:3000/api",
+    baseURL: baseUrl,
     browserBaseURL: "/api"
   },
   build: {
     extractCSS: true,
     // CDN 地址, 当运行 nuxt build 时，会将.nuxt/dist/目录的内容上传到CDN， '/_nuxt/'为默认值
-    // publicPath: '/_nuxt/',
+    publicPath: publicPath,
     babel: {
       presets: [
         ['vue-app', {
@@ -47,5 +54,8 @@ module.exports = {
   render: {
     resourceHints: false
   },
-  plugins: ['~plugins/element-ui']
+  plugins: [
+    '~plugins/element-ui',
+    { src: '~plugins/nuxt-quill-plugin.js', ssr: false }
+  ]
 }
