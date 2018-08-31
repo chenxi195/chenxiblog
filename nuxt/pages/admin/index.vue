@@ -208,12 +208,6 @@
   }
 </script>
 <style lang="less" scoped>
-    .el-header {
-        background-color: #F9FAFC;
-        color: #333;
-        line-height: 60px;
-        margin: 0;
-    }
     .admin-table {
         width: 100%;
     }

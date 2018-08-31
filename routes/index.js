@@ -10,6 +10,7 @@ router.post('/setPageTop',  controller.setPageTop);
 router.post('/cancelPageTop',  controller.cancelPageTop);
 router.post('/createOrSavePage',  controller.saveOrUpdatePage);
 router.post('/deletePage',  controller.deletePage);
+router.post('/loginSubmit',  controller.loginSubmit);
 
 
 module.exports = router;

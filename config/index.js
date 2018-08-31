@@ -7,6 +7,9 @@ let config = {
     password: null,
     database: 'chenxiblog',
     dialect: 'mysql'
+  },
+  session: {
+    password: 'ChenxiblogPWD123'
   }
 };
 

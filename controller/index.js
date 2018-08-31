@@ -1,5 +1,6 @@
 const pageProxy = require('../db/page');
-const errorJson = (str)=>Object({success:false, message: str || '请求失败', description: str || '请求失败', code: '0'});
+const sessionConfig = require('../config').session;
+const {successJson, errorJson} = require("../util");
 
 const setPageTop = (req, res, next) => {
   let body = req.body;
@@ -95,6 +96,18 @@ const deletePage = (req, res, next) => {
     })
 };
 
+const loginSubmit = (req, res, next) => {
+  const pwd = req.body.password;
+  const sessionPassword = sessionConfig.password;
+
+  if(pwd === sessionPassword){
+    req.session.userPWD = sessionPassword;
+    res.json(successJson('登录成功!'))
+  }else{
+    res.json(errorJson('登录失败，密码错误'));
+  }
+};
+
 
 
 module.exports = {
@@ -102,5 +115,6 @@ module.exports = {
   getPageList,
   saveOrUpdatePage,
   deletePage,
-  cancelPageTop
+  cancelPageTop,
+  loginSubmit
 }

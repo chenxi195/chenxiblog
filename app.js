@@ -4,6 +4,8 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const session = require('express-session');
+const sessionConfig = require('./config').session;
 const routes = require('./routes/index');
 const app = express();
 const {Nuxt, Builder} = require('nuxt');
@@ -15,6 +17,16 @@ app.use(bodyParser.json({
 }));
 app.use(bodyParser.urlencoded({ extended: false,limit: '20488kb'}));
 app.use(cookieParser());
+app.use(session({secret:"keyboard cat", resave: false, saveUninitialized: true, cookie: { maxAge: 60000 }}));
+
+app.use('/admin', function (req, res, next) {
+  if(req.session.userPWD && req.session.userPWD === sessionConfig.password){
+    next();
+  }else{
+    res.redirect('/login');
+  }
+});
+
 app.use('/api', routes);
 
 let nuxtConfig = require('./nuxt/nuxt.config.js');
