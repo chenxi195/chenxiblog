@@ -8,10 +8,11 @@ module.exports = {
     title: 'chenxiblog',
     meta: [
       {charset: 'utf-8'},
-      {name: 'viewport', content: 'width=device-width, initial-scale=1,user-scalable=no'},
+      {name: 'viewport', content: 'width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover'},
       {hid: 'description', name: 'description', content: 'chenxiblog'},
       {name:"format-detection",content:"telephone=no"},
-      {name: "keywords", content: "chenxiblog"}
+      {name: "keywords", content: "chenxiblog"},
+      {name: "author", content: "chenxi195"}
     ],
     link: [
       {rel: 'icon', type: 'image/x-icon', href: '/img/fav.ico'}

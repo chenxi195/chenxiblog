@@ -1,6 +1,6 @@
 <template>
     <el-container>
-        <el-header>
+        <el-header class="admin-header">
             <h1 class="h1">
                 后台控制面板
             </h1>

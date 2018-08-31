@@ -17,7 +17,7 @@ app.use(bodyParser.json({
 }));
 app.use(bodyParser.urlencoded({ extended: false,limit: '20488kb'}));
 app.use(cookieParser());
-app.use(session({secret:"keyboard cat", resave: false, saveUninitialized: true, cookie: { maxAge: 60000 }}));
+app.use(session({secret:"keyboard cat", resave: false, saveUninitialized: true, cookie: { maxAge: 60*1000*10 }}));
 
 app.use('/admin', function (req, res, next) {
   if(req.session.userPWD && req.session.userPWD === sessionConfig.password){
