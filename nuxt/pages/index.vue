@@ -357,11 +357,11 @@
 
 <script>
   export default {
-    head: {
-      link: [
-        {rel: 'stylesheet', href: '/css/blog.css'}
-      ]
-    },
+//    head: {
+//      link: [
+//        {rel: 'stylesheet', href: '/css/blog.css'}
+//      ]
+//    },
     mounted () {
     },
     methods: {

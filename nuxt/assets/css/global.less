@@ -1,11 +1,20 @@
 @import "variables.less";
 @import "mixin.less";
 @import "utilities.less";
+@import "type.less";
+@import "blog.less";
 
 * {
   margin:0;
   padding:0;
-  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+  //font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+}
+
+body {
+  font-family: 'Lato', arial, sans-serif;
+  color: #434343;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
 }
 
 a {
@@ -23,25 +32,6 @@ a {
 
 .clear {
   zoom: 1;
-}
-
-.h1 {
-  font-size: 20px;
-}
-.h2 {
-  font-size: 18px;
-}
-.h3 {
-  font-size: 16px;
-}
-.h4 {
-  font-size: 14px;
-}
-.h5 {
-  font-size: 13px;
-}
-.h6 {
-  font-size: 12px;
 }
 
 .admin-header.el-header {
