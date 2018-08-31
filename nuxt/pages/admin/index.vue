@@ -8,11 +8,31 @@
         </el-header>
         <el-main>
             <el-form :inline="true" :model="search" class="filter-form" ref="search">
-                <el-form-item label="文章类型" prop="type" :label-width="formLabelWidth">
-                    <el-select v-model="search.type" placeholder="请选择文章类型">
+                <el-form-item label="文章标题" prop="title">
+                    <el-input v-model="search.title" placeholder="请输入文章标题" @keyup.enter.native="onSearch('search')" @blur="onSearch('search')"></el-input>
+                </el-form-item>
+                <el-form-item label="文章类型" prop="type">
+                    <el-select v-model="search.type" placeholder="请选择文章类型" @change="onSearch('search')">
                         <el-option label="全部" value="ALL"></el-option>
                         <el-option label="前端技术" :value="1"></el-option>
                     </el-select>
+                </el-form-item>
+                <el-form-item label="时间范围" prop="time">
+                    <el-date-picker
+                            v-model="search.time"
+                            type="daterange"
+                            align="right"
+                            range-separator="至"
+                            start-placeholder="开始日期"
+                            end-placeholder="结束日期"
+                            :picker-options="timeOptions"
+                            @change="onSearch('search')"
+                    >
+                    </el-date-picker>
+                </el-form-item>
+                <el-form-item>
+                    <el-button @click="onReset('search')">重置</el-button>
+                    <el-button type="primary" @click="onSearch('search')">搜索</el-button>
                 </el-form-item>
             </el-form>
             <el-table border stripe :data="items"
@@ -61,6 +81,7 @@
 
 <script>
   import editForm from '~/components/modals/edit-form.vue';
+  import time from '~/assets/js/time.js';
   export default {
     async asyncData({app}){
       let {data} = await app.$axios.get('/getPageList');
@@ -75,9 +96,12 @@
         dialogVisible: false,
         btnLoading: false,
         search: {
-          type: 'ALL'
+          type: 'ALL',
+          time: '',
+          title: ''
         },
         currentItem: {},
+        timeOptions: time
       }
     },
     methods: {
@@ -102,6 +126,19 @@
           .catch(e => {
             this.$message({type: 'error', message: e.message});
           });
+      },
+      onReset (form) {
+        this.$refs[form].resetFields();
+      },
+      onSearch (form) {
+        this.$refs[form].validate((valid) => {
+          if (valid) {
+            this.requestList(1);
+          } else {
+            this.$message.warning('请将信息填写正确再提交哦～');
+            return false;
+          }
+        });
       },
       addBlog () {
         this.dialogVisible = true;

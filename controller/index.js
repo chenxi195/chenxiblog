@@ -61,13 +61,19 @@ const getPageList = (req, res, next) => {
     order: [['id', 'ASC']]
   };
 
-  if(query.text){
+  if(query.title){
     params.where.title = {
-      [Sequelize.Op.like]: `%${query.text}%`
+      [Sequelize.Op.like]: `%${query.title}%`
     }
   }
   if(query.type && query.type !== 'ALL'){
     params.where.type = query.type;
+  }
+  if(query.time && query.time[0] && query.time[1]){
+    params.where['created_at'] = {
+      [Sequelize.Op.gte]: query.time[0],
+      [Sequelize.Op.lte]: query.time[1]
+    }
   }
   params.where.status = query.status || 1;
 
