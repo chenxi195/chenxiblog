@@ -14,7 +14,10 @@
                 <el-form-item label="文章类型" prop="type">
                     <el-select v-model="search.type" placeholder="请选择文章类型" @change="onSearch('search')">
                         <el-option label="全部" value="ALL"></el-option>
-                        <el-option label="前端技术" :value="1"></el-option>
+                        <el-option label="Nodejs" :value="1"></el-option>
+                        <el-option label="Javascript & jQuery & MVVM" :value="2"></el-option>
+                        <el-option label="HTML5, CSS3, SASS & LESS" :value="3"></el-option>
+                        <el-option label="Others" :value="4"></el-option>
                     </el-select>
                 </el-form-item>
                 <el-form-item label="时间范围" prop="time">

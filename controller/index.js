@@ -31,11 +31,15 @@ const saveOrUpdatePage = (req, res, next) => {
   if(!body.title){
     return res.json(errorJson('文章title缺失'))
   }
+  if(!body.summary){
+    return res.json(errorJson('文章summary缺失'))
+  }
   if(!body.content){
     return res.json(errorJson('文章content缺失'))
   }
 
   model.title = body.title;
+  model.summary = body.summary;
   model.content = body.content;
   model.type = body.type || 1;
 
@@ -51,6 +55,39 @@ const saveOrUpdatePage = (req, res, next) => {
       })
   }
 
+};
+
+const getFrontFirstPage = (req, res, next) => {
+  let paginateParams = {
+    page: 1,
+    perPage: 10,
+    where: {
+      status: 1,
+      top: 1
+    },
+    order: [['id', 'ASC']]
+  };
+
+  Promise.all([
+    pageProxy.findOne({where: {status: 1, top: 2}}),
+    pageProxy.paginate(paginateParams),
+    pageProxy.count({where: {status: 1, type: 1}}),
+    pageProxy.count({where: {status: 1, type: 2}}),
+    pageProxy.count({where: {status: 1, type: 3}}),
+    pageProxy.count({where: {status: 1, type: 4}}),
+    pageProxy.count({where: {status: 1}})
+  ])
+    .then(rs => {
+      let obj = {};
+      obj.topObj = rs[0].data;
+      obj.paginate = rs[1].data;
+      obj.type1Count = rs[2].data;
+      obj.type2Count = rs[3].data;
+      obj.type3Count = rs[4].data;
+      obj.type4Count = rs[5].data;
+      obj.allCount = rs[6].data;
+      res.json(successJson(obj));
+    })
 };
 
 const getPageList = (req, res, next) => {
@@ -75,6 +112,9 @@ const getPageList = (req, res, next) => {
       [Sequelize.Op.gte]: query.time[0],
       [Sequelize.Op.lte]: query.time[1]
     }
+  }
+  if(query.top){
+    params.where.top = query.top;
   }
   params.where.status = query.status || 1;
 
@@ -116,5 +156,6 @@ module.exports = {
   saveOrUpdatePage,
   deletePage,
   cancelPageTop,
-  loginSubmit
+  loginSubmit,
+  getFrontFirstPage
 }

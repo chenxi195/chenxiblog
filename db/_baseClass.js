@@ -130,6 +130,31 @@ BaseClass.prototype.updateById = function(id, update, options){
   });
 };
 
+/*
+ * 数据量
+ * @param options 可选
+ */
+
+BaseClass.prototype.count = function(options){
+  let self = this;
+
+  return new Promise((resolve, reject) => {
+    let opts = {};
+    if(!options.where){
+      opts.where = options;
+    } else {
+      opts = options
+    }
+    self.model.count(opts)
+      .then(rs => {
+        resolve(successJson(rs));
+      })
+      .catch(e => {
+        resolve(errorJson(e.message));
+      });
+  });
+};
+
 /**
  * 分页查询
  * @options(Object)  {

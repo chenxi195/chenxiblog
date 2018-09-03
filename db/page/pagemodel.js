@@ -4,10 +4,14 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       comment: '标题'
     },
+    summary: {
+      type: DataTypes.STRING,
+      comment: '概述'
+    },
     type: {
       type:DataTypes.BIGINT(11),
       defaultValue: 1,
-      comment: '类型'
+      comment: '1-Nodejs 2-Javascript & jQuery & MVVM 3-HTML5, CSS3, SASS & LESS 4-Others'
     },
     top: {
       type: DataTypes.BIGINT(11),

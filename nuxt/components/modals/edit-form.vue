@@ -2,11 +2,17 @@
     <el-form :model="form">
         <el-form-item label="文章类型" prop="type" :label-width="formLabelWidth">
             <el-select v-model="form.type" placeholder="请选择文章类型">
-                <el-option label="前端技术" :value="1"></el-option>
+                <el-option label="Nodejs" :value="1"></el-option>
+                <el-option label="Javascript & jQuery & MVVM" :value="2"></el-option>
+                <el-option label="HTML5, CSS3, SASS & LESS" :value="3"></el-option>
+                <el-option label="Others" :value="4"></el-option>
             </el-select>
         </el-form-item>
         <el-form-item label="文章标题" prop="title" :label-width="formLabelWidth">
             <el-input v-model="form.title" auto-complete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="文章概述" prop="summary" :label-width="formLabelWidth">
+            <el-input v-model="form.summary" auto-complete="off"></el-input>
         </el-form-item>
         <el-form-item label="文章内容" prop="content" :label-width="formLabelWidth" class="editor-container">
             <div class="quill-editor" style="height: 300px;overflow-y: auto;"
@@ -42,6 +48,7 @@ export default {
       form: {
         type: this.data.type || 1,
         title: this.data.title || '',
+        summary: this.data.summary || '',
         content: this.data.content || '',
         id: this.data.id || null
       }
