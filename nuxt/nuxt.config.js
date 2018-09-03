@@ -26,7 +26,7 @@ module.exports = {
     {src: '~/assets/css/global.less', lang: 'less'}
   ],
   loading: {
-    color: '#4891ff'
+    color: '#66cb8c'
   },
   modules: [
     '@nuxtjs/axios'

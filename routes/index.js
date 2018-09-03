@@ -6,6 +6,7 @@ const router = express.Router();
 const controller = require('../controller');
 
 router.get('/getPageList',  controller.getPageList);
+router.get('/getBaseInfo',  controller.getBaseInfo);
 router.get('/getFrontFirstPage',  controller.getFrontFirstPage);
 router.post('/setPageTop',  controller.setPageTop);
 router.post('/cancelPageTop',  controller.cancelPageTop);

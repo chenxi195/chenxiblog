@@ -57,6 +57,25 @@ const saveOrUpdatePage = (req, res, next) => {
 
 };
 
+const getBaseInfo = (req, res, next) => {
+  Promise.all([
+    pageProxy.count({where: {status: 1, type: 1}}),
+    pageProxy.count({where: {status: 1, type: 2}}),
+    pageProxy.count({where: {status: 1, type: 3}}),
+    pageProxy.count({where: {status: 1, type: 4}}),
+    pageProxy.count({where: {status: 1}})
+  ])
+    .then(rs => {
+      let obj = {};
+      obj.type1Count = rs[0].data;
+      obj.type2Count = rs[1].data;
+      obj.type3Count = rs[2].data;
+      obj.type4Count = rs[3].data;
+      obj.allCount = rs[4].data;
+      res.json(successJson(obj));
+    })
+};
+
 const getFrontFirstPage = (req, res, next) => {
   let paginateParams = {
     page: 1,
@@ -70,22 +89,12 @@ const getFrontFirstPage = (req, res, next) => {
 
   Promise.all([
     pageProxy.findOne({where: {status: 1, top: 2}}),
-    pageProxy.paginate(paginateParams),
-    pageProxy.count({where: {status: 1, type: 1}}),
-    pageProxy.count({where: {status: 1, type: 2}}),
-    pageProxy.count({where: {status: 1, type: 3}}),
-    pageProxy.count({where: {status: 1, type: 4}}),
-    pageProxy.count({where: {status: 1}})
+    pageProxy.paginate(paginateParams)
   ])
     .then(rs => {
       let obj = {};
       obj.topObj = rs[0].data;
       obj.paginate = rs[1].data;
-      obj.type1Count = rs[2].data;
-      obj.type2Count = rs[3].data;
-      obj.type3Count = rs[4].data;
-      obj.type4Count = rs[5].data;
-      obj.allCount = rs[6].data;
       res.json(successJson(obj));
     })
 };
@@ -157,5 +166,6 @@ module.exports = {
   deletePage,
   cancelPageTop,
   loginSubmit,
-  getFrontFirstPage
+  getFrontFirstPage,
+  getBaseInfo
 }
