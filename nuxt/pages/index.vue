@@ -42,13 +42,24 @@
                                     <a class="btn btn-cta-secondary" href="#" target="_blank">阅读全文 <i class="fa el-icon-more"></i></a>
                                 </div><!--//item-->
                                 <hr class="divider" />
-                                <div class="item row" v-for="item in paginate.items">
+                                <div class="item row" v-for="item in paginate.items" v-if="paginate.items.length">
                                     <div class="desc col-md-8 col-sm-8 col-xs-12">
                                         <h3 class="title"><a href="#" target="_blank">{{item.title}}</a></h3>
                                         <p>{{item.summary}}</p>
                                         <p><a class="more-link" href="#" target="_blank">阅读全文 <i class="fa el-icon-more"></i></a></p>
                                     </div><!--//desc-->
                                 </div><!--//item-->
+                                <div v-if="!paginate.items.length">
+                                    <div class="no-data-text">没有数据....</div>
+                                </div>
+                                <el-pagination
+                                        class="blog-pagination"
+                                        @current-change="handleCurrentChange"
+                                        :current-page="paginate.page"
+                                        :page-sizes="[15, 30, 60, 100]"
+                                        layout="total, prev, pager, next, jumper"
+                                        :total="paginate.total">
+                                </el-pagination>
                             </div><!--//content-->
                         </div><!--//section-inner-->
                     </section><!--//section-->
@@ -56,7 +67,56 @@
                 <el-col :md="8" :sm="24" :xs="24">
                     <aside class="info aside section">
                         <div class="section-inner">
-                            <h2 class="heading sr-only">基础信息</h2>
+                            <el-form :inline="true" :model="searchForm" class="search-form" ref="searchForm" @submit.native.prevent>
+                                <el-form-item label="" prop="text" label-width="200px">
+                                    <el-input type="text" v-model="searchForm.title" placeholder="请输入搜索关键字" auto-complete="off"></el-input>
+                                </el-form-item>
+                                <el-form-item>
+                                    <el-button type="success" @click="submitForm()" class="search-btn">搜索</el-button>
+                                </el-form-item>
+                            </el-form>
+                        </div>
+                    </aside>
+                    <aside class="skills aside section">
+                        <div class="section-inner">
+                            <h2 class="heading"><a href="/">相关技术</a></h2>
+                            <div class="content">
+                                <div class="skillset">
+                                    <div class="item">
+                                        <h3 class="level-title">
+                                            <a href="#" @click.prevent="typeSearch(1)">Nodejs</a>
+                                            <span class="level-label">{{type1Count}}</span>
+                                        </h3>
+                                        <el-progress :text-inside="true" :stroke-width="18" :percentage="type1Percent" status="success"></el-progress>
+                                    </div><!--//item-->
+                                    <div class="item">
+                                        <h3 class="level-title">
+                                            <a href="#" @click.prevent="typeSearch(2)">Javascript &amp; jQuery &amp; MVVM</a>
+                                            <span class="level-label">{{type2Count}}</span>
+                                        </h3>
+                                        <el-progress :text-inside="true" :stroke-width="18" :percentage="type2Percent" status="success"></el-progress>
+                                    </div><!--//item-->
+                                    <div class="item">
+                                        <h3 class="level-title">
+                                            <a href="#" @click.prevent="typeSearch(3)">HTML5, CSS3, SASS &amp; LESS</a>
+                                            <span class="level-label">{{type3Count}}</span>
+                                        </h3>
+                                        <el-progress :text-inside="true" :stroke-width="18" :percentage="type3Percent" status="success"></el-progress>
+                                    </div><!--//item-->
+                                    <div class="item">
+                                        <h3 class="level-title">
+                                            <a href="#" @click.prevent="typeSearch(4)">Others</a>
+                                            <span class="level-label">{{type4Count}}</span>
+                                        </h3>
+                                        <el-progress :text-inside="true" :stroke-width="18" :percentage="type4Percent" status="success"></el-progress>
+                                    </div><!--//item-->
+                                </div>
+                            </div><!--//content-->
+                        </div><!--//section-inner-->
+                    </aside><!--//section-->
+                    <aside class="info aside section">
+                        <div class="section-inner">
+                            <h2 class="heading sr-only">联系我们</h2>
                             <div class="content">
                                 <ul class="list-unstyled">
                                     <li><i class="fa el-icon-message"></i> <span class="sr-only">Email: </span><a href="#">chenxi195@gmail.com</a></li>
@@ -70,40 +130,14 @@
                         <div class="section-inner">
                             <el-form :inline="true" :model="searchForm" class="search-form" ref="searchForm" @submit.native.prevent>
                                 <el-form-item label="" prop="text" label-width="200px">
-                                    <el-input type="text" v-model="searchForm.text" placeholder="请输入搜索关键字" auto-complete="off"></el-input>
+                                    <el-input type="text" v-model="searchForm.title" placeholder="请输入搜索关键字" auto-complete="off"></el-input>
                                 </el-form-item>
                                 <el-form-item>
-                                    <el-button type="success" @click="submitForm('searchForm')" class="search-btn">搜索</el-button>
+                                    <el-button type="success" @click="submitForm()" class="search-btn">搜索</el-button>
                                 </el-form-item>
                             </el-form>
                         </div>
                     </aside>
-                    <aside class="skills aside section">
-                        <div class="section-inner">
-                            <h2 class="heading"><a href="/">相关技术</a></h2>
-                            <div class="content">
-                                <div class="skillset">
-
-                                    <div class="item">
-                                        <h3 class="level-title">Nodejs<span class="level-label">{{type1Count}}</span></h3>
-                                        <el-progress :text-inside="true" :stroke-width="18" :percentage="type1Percent" status="success"></el-progress>
-                                    </div><!--//item-->
-                                    <div class="item">
-                                        <h3 class="level-title">Javascript &amp; jQuery &amp; MVVM<span class="level-label">{{type2Count}}</span></h3>
-                                        <el-progress :text-inside="true" :stroke-width="18" :percentage="type2Percent" status="success"></el-progress>
-                                    </div><!--//item-->
-                                    <div class="item">
-                                        <h3 class="level-title">HTML5, CSS3, SASS &amp; LESS<span class="level-label">{{type3Count}}</span></h3>
-                                        <el-progress :text-inside="true" :stroke-width="18" :percentage="type3Percent" status="success"></el-progress>
-                                    </div><!--//item-->
-                                    <div class="item">
-                                        <h3 class="level-title">Others<span class="level-label">{{type4Count}}</span></h3>
-                                        <el-progress :text-inside="true" :stroke-width="18" :percentage="type4Percent" status="success"></el-progress>
-                                    </div><!--//item-->
-                                </div>
-                            </div><!--//content-->
-                        </div><!--//section-inner-->
-                    </aside><!--//section-->
                 </el-col>
             </el-row>
         </div>
@@ -146,18 +180,47 @@
     data () {
       return {
         searchForm:{
-          text: ''
+          title: '',
+          type: 'ALL'
         },
         loading: false
       }
     },
     methods: {
-      submitForm (form) {
-
+      requestList (page) {
+        let self = this;
+        let cPage = page || this.page || 1;
+        let reqObj = Object.assign({page: cPage}, self.searchForm);
+        this.loading = true;
+        this.$axios.get('/getPageList',{params: reqObj})
+          .then(function(res){
+            if(res.data.code==='1'){
+              self.$set(self.paginate, 'items', res.data.data.items);
+              self.$set(self.paginate, 'page', res.data.data.page);
+              self.$set(self.paginate, 'total', res.data.data.total);
+              self.$set(self.paginate, 'currentPageTotal', res.data.data.currentPageTotal);
+              self.$set(self.paginate, 'pages', res.data.data.pages);
+              self.$set(self, 'loading', false);
+            }else{
+              self.$message.error(res.data.description);
+            }
+          })
+          .catch(e => {
+            this.$message({type: 'error', message: e.message});
+          });
+      },
+      submitForm () {
+        this.searchForm.type = 'ALL';
+        this.requestList(1);
+      },
+      typeSearch (val) {
+        this.searchForm.type = val;
+        this.searchForm.title = '';
+        this.requestList(1);
+      },
+      handleCurrentChange(val){
+        this.requestList(val);
       }
     }
   }
 </script>
-<style lang="less" scoped>
-
-</style>
