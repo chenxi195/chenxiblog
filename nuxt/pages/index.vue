@@ -4,15 +4,15 @@
             <div class="container">
                 <img class="profile-image img-responsive pull-left" src="/img/profile.png" alt="James Lee" />
                 <div class="profile-content pull-left">
-                    <h1 class="name">James Lee</h1>
-                    <h2 class="desc">Web App Developer</h2>
-                    <ul class="social list-inline">
-                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                        <li><a href="#"><i class="fa fa-github-alt"></i></a></li>
-                        <li class="last-item"><a href="#"><i class="fa fa-hacker-news"></i></a></li>
-                    </ul>
+                    <h1 class="name">前端茶座</h1>
+                    <h2 class="desc">前端开发工程师的技术博客</h2>
+                    <!--<ul class="social list-inline">-->
+                        <!--<li><a href="#"><i class="fa fa-twitter"></i></a></li>-->
+                        <!--<li><a href="#"><i class="fa fa-google-plus"></i></a></li>-->
+                        <!--<li><a href="#"><i class="fa fa-linkedin"></i></a></li>-->
+                        <!--<li><a href="#"><i class="fa fa-github-alt"></i></a></li>-->
+                        <!--<li class="last-item"><a href="#"><i class="fa fa-hacker-news"></i></a></li>-->
+                    <!--</ul>-->
                 </div><!--//profile-->
                 <!--<a class="btn btn-cta-primary pull-right" href="http://themes.3rdwavemedia.com/" target="_blank"><i class="fa fa-paper-plane"></i> Contact Me</a>-->
                 <el-button type="success" class="btn pull-right"><i class="fa fa-paper-plane"></i> Contact Me</el-button>
@@ -357,11 +357,11 @@
 
 <script>
   export default {
-//    head: {
-//      link: [
-//        {rel: 'stylesheet', href: '/css/blog.css'}
-//      ]
-//    },
+    head: {
+      style: [
+        { cssText: 'body { background-color: #DAE3E7 }', type: 'text/css' }
+      ]
+    },
     mounted () {
     },
     methods: {

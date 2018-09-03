@@ -67,11 +67,12 @@ export default {
 
 <style lang="less">
     .editor-container {
-        .ql-size {
-            height: auto !important;
+        .ql-toolbar {
+            height: 40px;
+            .ql-color {
+                height: 22px;
+            }
         }
-        .ql-color {
-            height: 36px;
-        }
+
     }
 </style>

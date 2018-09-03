@@ -1,10 +1,10 @@
 <template>
     <el-container>
         <el-header class="admin-header">
-            <h1 class="h1">
+            <h2 class="h2">
                 后台控制面板
                 <el-button type="primary" class="add-btn" @click="addBlog">添加一篇博客</el-button>
-            </h1>
+            </h2>
         </el-header>
         <el-main>
             <el-form :inline="true" :model="search" class="filter-form" ref="search">
@@ -44,7 +44,7 @@
                 <el-table-column prop="id" sortable label="序号" width="80">
                     <template slot-scope="scope">
                         <span style="margin-right: 10px">{{ scope.row.id }}</span>
-                        <i class="el-icon-star-on" style="color: red" v-if="scope.row.top"></i>
+                        <i class="el-icon-star-on" style="color: red" v-if="scope.row.top==2"></i>
                     </template>
                 </el-table-column>
                 <el-table-column prop="title" label="标题"></el-table-column>
@@ -53,7 +53,7 @@
                 <el-table-column label="操作">
                     <template slot-scope="scope">
                         <el-button size="mini" type="primary" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-                        <el-button size="mini" type="info" @click="handleTop(scope.$index, scope.row)">{{scope.row.top ? '取消置顶' : '置顶'}}</el-button>
+                        <el-button size="mini" type="info" @click="handleTop(scope.$index, scope.row)">{{scope.row.top==2 ? '取消置顶' : '置顶'}}</el-button>
                         <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
                     </template>
                 </el-table-column>
@@ -86,6 +86,11 @@
     async asyncData({app}){
       let {data} = await app.$axios.get('/getPageList');
       return data.data
+    },
+    head: {
+      style: [
+        { cssText: 'body { background-color: #fff }', type: 'text/css' }
+      ]
     },
     components: {
       editForm
@@ -189,14 +194,14 @@
         this.requestList(val);
       },
       handleTop (index, obj) {
-        let isTop = !obj.top;
+        let isTop = obj.top == 1;
         let url = isTop ? '/setPageTop' : '/cancelPageTop';
         this.$axios.post(url, {id: obj.id})
           .then(rs => {
             let msgStatus = rs.data.code === '1' ? 'success' : 'error';
             this.$message({type: msgStatus,message: rs.data.description});
             if(rs.data.code === '1'){
-              obj.top = isTop;
+              obj.top = isTop ? 2 : 1;
             }
           })
           .catch(e => {
@@ -217,6 +222,6 @@
     .add-btn {
         float: right;
         display: inline-block;
-        margin-top: 10px;
+        margin-bottom: 15px;
     }
 </style>

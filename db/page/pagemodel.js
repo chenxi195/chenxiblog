@@ -10,9 +10,9 @@ module.exports = (sequelize, DataTypes) => {
       comment: '类型'
     },
     top: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
-      comment: '是否置顶'
+      type: DataTypes.BIGINT(11),
+      defaultValue: 1,
+      comment: '是否置顶 1否 2是'
     },
     status: {
       type:DataTypes.BIGINT(11),

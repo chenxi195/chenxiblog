@@ -1,9 +1,9 @@
 <template>
     <el-container>
         <el-header class="admin-header">
-            <h1 class="h1">
+            <h2 class="h2">
                 后台控制面板
-            </h1>
+            </h2>
         </el-header>
         <el-main>
             <el-form :inline="true" :model="loginForm" class="login-form" ref="loginForm" @submit.native.prevent>
@@ -44,8 +44,8 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-.login-form {
-    width: 600px;
-    margin: 0 auto;
-}
+    .login-form {
+        width: 600px;
+        margin: 0 auto;
+    }
 </style>

@@ -7,7 +7,7 @@ const setPageTop = (req, res, next) => {
   if(!body.id){
     return res.json(errorJson('文章id缺失'))
   }
-  pageProxy.updateById(body.id, {top: true})
+  pageProxy.updateById(body.id, {top: 2})
     .then(rs => {
       res.json(rs)
     })
@@ -18,7 +18,7 @@ const cancelPageTop = (req, res, next) => {
   if(!body.id){
     return res.json(errorJson('文章id缺失'))
   }
-  pageProxy.updateById(body.id, {top: false})
+  pageProxy.updateById(body.id, {top: 1})
     .then(rs => {
       res.json(rs)
     })
