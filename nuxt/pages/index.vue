@@ -22,7 +22,7 @@
         </div>
         <footer class="footer">
             <div class="container text-center">
-                <small class="copyright">Developed by <a href="https://github.com/chenxi195" target="_blank">chenxi195</a></small>
+                <small class="copyright">Developed by <a href="https://github.com/chenxi195" target="_blank">chenxi195</a> 京ICP备15003189号-1</small>
             </div>
         </footer>
     </div>
