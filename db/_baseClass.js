@@ -168,7 +168,7 @@ BaseClass.prototype.paginate = function(options) {
   let self = this;
   let where = options.where || {};
   let page = options.page > 0 ? options.page : 1;
-  let perPage = options.perPage > 0 ? options.perPage : 15;
+  let perPage = options.perPage > 0 ? options.perPage : 10;
   let skip = (page - 1) * perPage;
   let opts = {where:where, limit:perPage, offset:skip};
 

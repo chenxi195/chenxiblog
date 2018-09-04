@@ -14,7 +14,6 @@
                         <!--<li class="last-item"><a href="#"><i class="fa fa-hacker-news"></i></a></li>-->
                     <!--</ul>-->
                 </div><!--//profile-->
-                <!--<a class="btn btn-cta-primary pull-right" href="http://themes.3rdwavemedia.com/" target="_blank"><i class="fa fa-paper-plane"></i> Contact Me</a>-->
                 <!--<el-button type="success" class="btn pull-right"><i class="fa fa-paper-plane"></i> Contact Me</el-button>-->
             </div>
         </header>
@@ -24,7 +23,7 @@
         <footer class="footer">
             <div class="container text-center">
                 <small class="copyright">Developed by <a href="https://github.com/chenxi195" target="_blank">chenxi195</a></small>
-            </div><!--//container-->
+            </div>
         </footer>
     </div>
 </template>

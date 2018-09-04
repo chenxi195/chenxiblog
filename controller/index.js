@@ -59,43 +59,40 @@ const saveOrUpdatePage = (req, res, next) => {
 
 const getBaseInfo = (req, res, next) => {
   Promise.all([
+    pageProxy.count({where: {status: 1}}),
     pageProxy.count({where: {status: 1, type: 1}}),
     pageProxy.count({where: {status: 1, type: 2}}),
     pageProxy.count({where: {status: 1, type: 3}}),
-    pageProxy.count({where: {status: 1, type: 4}}),
-    pageProxy.count({where: {status: 1}})
+    pageProxy.count({where: {status: 1, type: 4}})
   ])
     .then(rs => {
       let obj = {};
-      obj.type1Count = rs[0].data;
-      obj.type2Count = rs[1].data;
-      obj.type3Count = rs[2].data;
-      obj.type4Count = rs[3].data;
-      obj.allCount = rs[4].data;
+      let countArr = [];
+      let percentArr = [];
+      rs.forEach((item, index) => {
+        countArr[index] = item.data;
+      });
+      countArr.forEach((item, index) => {
+        percentArr[index] = Math.floor((item/countArr[0])*100);
+      });
+      obj.countArr = countArr;
+      obj.percentArr = percentArr;
+      // obj.type1Count = rs[0].data;
+      // obj.type2Count = rs[1].data;
+      // obj.type3Count = rs[2].data;
+      // obj.type4Count = rs[3].data;
+      // obj.allCount = rs[4].data;
       res.json(successJson(obj));
     })
 };
 
-const getFrontFirstPage = (req, res, next) => {
-  let paginateParams = {
-    page: 1,
-    perPage: 10,
-    where: {
-      status: 1,
-      top: 1
-    },
-    order: [['id', 'ASC']]
-  };
-
-  Promise.all([
-    pageProxy.findOne({where: {status: 1, top: 2}}),
-    pageProxy.paginate(paginateParams)
-  ])
+const getTopPage = (req, res, next) => {
+  pageProxy.findOne({
+    where: {status: 1, top: 2},
+    attributes: ['id', 'created_at', 'summary', 'title']
+  })
     .then(rs => {
-      let obj = {};
-      obj.topObj = rs[0].data;
-      obj.paginate = rs[1].data;
-      res.json(successJson(obj));
+      res.json(rs);
     })
 };
 
@@ -103,8 +100,9 @@ const getPageList = (req, res, next) => {
   let query = req.query;
   let params = {
     page: query.page || 1,
-    perPage: query.perPage || 15,
+    perPage: query.perPage || 10,
     where: {},
+    attributes: ['id', 'created_at', 'summary', 'title'],
     order: [['id', 'ASC']]
   };
 
@@ -131,6 +129,19 @@ const getPageList = (req, res, next) => {
     .then(rs => {
       res.json(rs);
     })
+};
+
+const getPageItem = (req, res, next) => {
+  let id = req.query.id;
+
+  if(!id){
+    return res.json(errorJson('文章id缺失'));
+  }
+  pageProxy.findById(id)
+    .then(rs => {
+      res.json(rs);
+    })
+
 };
 
 const deletePage = (req, res, next) => {
@@ -166,6 +177,7 @@ module.exports = {
   deletePage,
   cancelPageTop,
   loginSubmit,
-  getFrontFirstPage,
-  getBaseInfo
-}
+  getTopPage,
+  getBaseInfo,
+  getPageItem
+};

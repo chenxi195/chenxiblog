@@ -57,6 +57,7 @@ module.exports = {
   },
   plugins: [
     '~plugins/element-ui',
+    '~/plugins/prototype',
     { src: '~plugins/nuxt-quill-plugin.js', ssr: false }
   ]
 }

@@ -13,11 +13,7 @@
                 </el-form-item>
                 <el-form-item label="文章类型" prop="type">
                     <el-select v-model="search.type" placeholder="请选择文章类型" @change="onSearch('search')">
-                        <el-option label="全部" value="ALL"></el-option>
-                        <el-option label="Nodejs" :value="1"></el-option>
-                        <el-option label="Javascript & jQuery & MVVM" :value="2"></el-option>
-                        <el-option label="HTML5, CSS3, SASS & LESS" :value="3"></el-option>
-                        <el-option label="Others" :value="4"></el-option>
+                        <el-option v-for="item in typeOptions" :key="item.no" :label="item.value" :value="item.no"></el-option>
                     </el-select>
                 </el-form-item>
                 <el-form-item label="时间范围" prop="time">
@@ -51,8 +47,16 @@
                     </template>
                 </el-table-column>
                 <el-table-column prop="title" label="标题"></el-table-column>
-                <el-table-column prop="created_at" sortable label="创建时间"></el-table-column>
-                <el-table-column prop="updated_at" sortable label="修改时间"></el-table-column>
+                <el-table-column sortable label="创建时间">
+                    <template slot-scope="scope">
+                        <i class="el-icon-time"></i> {{momentFormat(scope.row['created_at'])}}
+                    </template>
+                </el-table-column>
+                <el-table-column sortable label="修改时间">
+                    <template slot-scope="scope">
+                        <i class="el-icon-time"></i> {{momentFormat(scope.row['updated_at'])}}
+                    </template>
+                </el-table-column>
                 <el-table-column label="操作">
                     <template slot-scope="scope">
                         <el-button size="mini" type="primary" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
@@ -85,6 +89,7 @@
 <script>
   import editForm from '~/components/modals/edit-form.vue';
   import time from '~/assets/js/time.js';
+  import {typeArr} from '~/assets/js/type.js';
   export default {
     async asyncData({app}){
       let {data} = await app.$axios.get('/getPageList');
@@ -109,7 +114,8 @@
           title: ''
         },
         currentItem: {},
-        timeOptions: time
+        timeOptions: time,
+        typeOptions: typeArr
       }
     },
     methods: {
