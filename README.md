@@ -1,7 +1,5 @@
 # chenxiblog
 
-chenxiblog
-
 ### step 1: git clone
 ### step 2: npm install
 ### step 3: 确定mysql的database中有chenxiblog， 如果没有， 请参照执行：
