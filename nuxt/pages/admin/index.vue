@@ -92,7 +92,7 @@
   import {typeArr} from '~/assets/js/type.js';
   export default {
     async asyncData({app}){
-      let {data} = await app.$axios.get('/getPageList');
+      let {data} = await app.$axios.get('/getAdminPageList');
       return data.data
     },
     head: {

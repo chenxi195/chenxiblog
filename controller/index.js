@@ -96,6 +96,41 @@ const getTopPage = (req, res, next) => {
     })
 };
 
+const getAdminPageList = (req, res, next) => {
+  let query = req.query;
+  let params = {
+    page: query.page || 1,
+    perPage: query.perPage || 10,
+    where: {},
+    attributes: ['id', 'created_at', 'summary', 'title', 'content', 'top'],
+    order: [['id', 'ASC']]
+  };
+
+  if(query.title){
+    params.where.title = {
+      [Sequelize.Op.like]: `%${query.title}%`
+    }
+  }
+  if(query.type && query.type !== 'ALL'){
+    params.where.type = query.type;
+  }
+  if(query.time && query.time[0] && query.time[1]){
+    params.where['created_at'] = {
+      [Sequelize.Op.gte]: query.time[0],
+      [Sequelize.Op.lte]: query.time[1]
+    }
+  }
+  if(query.top){
+    params.where.top = query.top;
+  }
+  params.where.status = query.status || 1;
+
+  pageProxy.paginate(params)
+    .then(rs => {
+      res.json(rs);
+    })
+};
+
 const getPageList = (req, res, next) => {
   let query = req.query;
   let params = {
@@ -105,6 +140,11 @@ const getPageList = (req, res, next) => {
     attributes: ['id', 'created_at', 'summary', 'title'],
     order: [['id', 'ASC']]
   };
+
+  if(req.originalUrl === '/admin'){
+    params.attributes.push('content');
+    params.attributes.push('top');
+  }
 
   if(query.title){
     params.where.title = {
@@ -179,5 +219,6 @@ module.exports = {
   loginSubmit,
   getTopPage,
   getBaseInfo,
-  getPageItem
+  getPageItem,
+  getAdminPageList
 };
