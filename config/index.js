@@ -13,19 +13,4 @@ let config = {
     password: 'ChenxiblogPWD123'
   }
 };
-
-let proConfig = {
-  db: {
-    username: 'root',
-    host: '127.0.0.1',
-    port: '3306',
-    password: 'AD30c9013143',
-    database: 'chenxiblog',
-    dialect: 'mysql'
-  },
-  session: {
-    password: 'ChenxiblogPWD123'
-  }
-};
-
-module.exports = isDev ? config : proConfig;
+module.exports = config;
