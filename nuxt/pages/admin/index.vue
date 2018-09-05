@@ -124,7 +124,7 @@
         let cPage = page || this.page || 1;
         let reqObj = Object.assign({page: cPage}, self.search);
         this.loading = true;
-        this.$axios.get('/getPageList',{params: reqObj})
+        this.$axios.get('/getAdminPageList',{params: reqObj})
           .then(function(res){
             if(res.data.code==='1'){
               self.$set(self, 'items', res.data.data.items);

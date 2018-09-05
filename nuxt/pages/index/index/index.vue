@@ -2,7 +2,7 @@
     <section class="latest section">
         <div class="section-inner">
             <div class="content">
-                <div class="item featured ">
+                <div class="item featured " v-if="topObj">
                     <div class="text-center">
                         <h3 class="title"><a href="#" @click.prevent="goDetail(topObj.id)">{{topObj.title}}</a></h3>
                         <p class="summary">{{topObj.summary}}</p>
