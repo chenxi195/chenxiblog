@@ -39,6 +39,7 @@ module.exports = {
     extractCSS: true,
     // CDN 地址, 当运行 nuxt build 时，会将.nuxt/dist/目录的内容上传到CDN， '/_nuxt/'为默认值
     publicPath: publicPath,
+    maxChunkSize: 500000,
     babel: {
       presets: [
         ['vue-app', {
