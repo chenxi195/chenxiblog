@@ -4,6 +4,7 @@
       "name": "chenxiblog",
       "script": "./bin/www",
       "watch": true,
+      "exec_mode": "cluster",
       "env_production": {
         "PORT": 3000,
         "NODE_ENV": "production"
