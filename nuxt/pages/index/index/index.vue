@@ -20,7 +20,7 @@
                     </div>
 
                 </div>
-                <hr class="divider" />
+                <hr class="divider" v-if="topObj" />
                 <blog-list :type="searchForm.type" :title="searchForm.title"></blog-list>
             </div>
         </div>
