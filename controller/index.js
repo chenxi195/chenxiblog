@@ -1,6 +1,8 @@
 const pageProxy = require('../db/page');
 const sessionConfig = require('../config').session;
 const {successJson, errorJson} = require("../util");
+const path = require('path');
+const fs = require('fs');
 
 const setPageTop = (req, res, next) => {
   let body = req.body;
@@ -177,6 +179,11 @@ const loginSubmit = (req, res, next) => {
   }
 };
 
+const getResume = (req, res, next) => {
+  let url = path.join(__dirname, '../util/doc/a.doc');
+  fs.createReadStream(url).pipe(res);
+};
+
 
 
 module.exports = {
@@ -188,5 +195,6 @@ module.exports = {
   loginSubmit,
   getTopPage,
   getBaseInfo,
-  getPageItem
+  getPageItem,
+  getResume
 };
