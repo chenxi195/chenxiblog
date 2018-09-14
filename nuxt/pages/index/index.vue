@@ -18,7 +18,7 @@
             </aside>
             <aside class="skills aside section">
                 <div class="section-inner">
-                    <h2 class="heading">相关技术</h2>
+                    <h2 class="heading">技术导航</h2>
                     <div class="content">
                         <blog-skills></blog-skills>
                     </div>
@@ -26,11 +26,11 @@
             </aside>
             <aside class="info aside section">
                 <div class="section-inner">
-                    <h2 class="heading sr-only">联系我们</h2>
+                    <h2 class="heading sr-only">联系我</h2>
                     <div class="content">
                         <ul class="list-unstyled">
                             <li><i class="fa el-icon-message"></i> <span class="sr-only">Email: </span><a href="#">chenxi195@gmail.com</a></li>
-                            <li><i class="fa el-icon-view"></i> <span class="sr-only">Website: </span><a href="http://www.chenxiblog.com" target="_blank">http://www.chenxiblog.com</a></li>
+                            <li><i class="fa el-icon-view"></i> <span class="sr-only">Website: </span><a href="http://www.chenxiblog.com" target="_blank">http://chenxiblog.com</a></li>
                             <li><i class="fa el-icon-star-on"></i> <span class="sr-only">Github: </span><a href="https://github.com/chenxi195" target="_blank">https://github.com/chenxi195</a></li>
                         </ul>
                     </div>
