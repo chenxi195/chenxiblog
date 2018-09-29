@@ -1,5 +1,5 @@
 let isDev = !(process.env.NODE_ENV === 'production');
-let baseUrl = isDev ? 'http://127.0.0.1:3000/api' : '//chenxiblog.com/api';
+let baseUrl = isDev ? 'http://127.0.0.1:3000/api' : 'http://127.0.0.1:3000/api';
 let publicPath = isDev ? '/_nuxt/' : '/_nuxt/';
 
 module.exports = {
