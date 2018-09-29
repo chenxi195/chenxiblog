@@ -30,7 +30,7 @@
                     <div class="content">
                         <ul class="list-unstyled">
                             <li><i class="fa el-icon-message"></i> <span class="sr-only">Email: </span><a href="#">chenxi195@gmail.com</a></li>
-                            <li><i class="fa el-icon-view"></i> <span class="sr-only">Website: </span><a href="http://www.chenxiblog.com" target="_blank">http://chenxiblog.com</a></li>
+                            <li><i class="fa el-icon-view"></i> <span class="sr-only">Website: </span><a href="https://chenxiblog.com" target="_blank">https://chenxiblog.com</a></li>
                             <li><i class="fa el-icon-star-on"></i> <span class="sr-only">Github: </span><a href="https://github.com/chenxi195" target="_blank">https://github.com/chenxi195</a></li>
                             <li><i class="fa el-icon-star-on"></i> <span class="sr-only">Resume: </span><a href="/api/export/resume" target="_blank">Click Here</a></li>
                         </ul>
