@@ -12,6 +12,7 @@ router.get('/getPageItem',  controller.getPageItem);
 router.get('/getBaseInfo',  controller.getBaseInfo);
 router.get('/getTopPage',  controller.getTopPage);
 router.get('/export/resume',  controller.getResume);
+router.get('/getToken',  controller.getToken);
 router.post('/setPageTop',  controller.setPageTop);
 router.post('/cancelPageTop',  controller.cancelPageTop);
 router.post('/createOrSavePage',  controller.saveOrUpdatePage);

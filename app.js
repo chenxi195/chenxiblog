@@ -9,6 +9,7 @@ const sessionConfig = require('./config').session;
 const routes = require('./routes/index');
 const app = express();
 const {Nuxt, Builder} = require('nuxt');
+const {getDownloadUrl} = require('./util');
 
 app.use(favicon(path.join(__dirname, 'fav.ico')));
 app.use(logger('dev'));
@@ -18,7 +19,6 @@ app.use(bodyParser.json({
 app.use(bodyParser.urlencoded({ extended: false,limit: '20488kb'}));
 app.use(cookieParser());
 app.use(session({secret:"keyboard cat", resave: false, saveUninitialized: true, cookie: { maxAge: 60*1000*10 }}));
-
 app.use('/admin', function (req, res, next) {
   if(req.session.userPWD && req.session.userPWD === sessionConfig.password){
     next();
@@ -26,8 +26,12 @@ app.use('/admin', function (req, res, next) {
     res.redirect('/login');
   }
 });
-
 app.use('/api', routes);
+app.use('/pgd/imgs/:key', function (req, res) {
+  let key = req.params.key || 'default.png';
+  let url = getDownloadUrl(key);
+  res.redirect(301, url);
+});
 
 let nuxtConfig = require('./nuxt/nuxt.config.js');
 nuxtConfig.dev = !(process.env.NODE_ENV === 'production');

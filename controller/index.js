@@ -1,6 +1,6 @@
 const pageProxy = require('../db/page');
 const sessionConfig = require('../config').session;
-const {successJson, errorJson} = require("../util");
+const {successJson, errorJson, getUpToken} = require("../util");
 const path = require('path');
 const fs = require('fs');
 
@@ -184,6 +184,12 @@ const getResume = (req, res, next) => {
   fs.createReadStream(url).pipe(res);
 };
 
+const getToken = (req, res, next) => {
+  let fileName = req.query.filename;
+  let token = getUpToken(fileName);
+  res.json(successJson({token: token}));
+};
+
 
 
 module.exports = {
@@ -196,5 +202,6 @@ module.exports = {
   getTopPage,
   getBaseInfo,
   getPageItem,
-  getResume
+  getResume,
+  getToken
 };

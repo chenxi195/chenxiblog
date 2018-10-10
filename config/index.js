@@ -11,6 +11,12 @@ let config = {
   },
   session: {
     password: 'ChenxiblogPWD123'
+  },
+  qiniu: {
+    accessKey: 'g0-5YUfvhKhBl9M2CdjgP0d-eNpobBPiJxLINlSt',
+    secretKey: 'sbZMwukT8jO9IQFXoAZmfXgtQbRM1sWmZrUnRN6b',
+    domain: isDev ? 'http://pgd2fb33r.bkt.clouddn.com' : 'http://chenxiblog.com',
+    bucket: 'chenxi195'
   }
 };
 module.exports = config;
