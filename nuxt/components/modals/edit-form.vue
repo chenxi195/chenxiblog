@@ -54,7 +54,9 @@ export default {
     data: [Object]
   },
   mounted () {
-    this.$refs.myQuillEditor.quill.getModule('toolbar').addHandler('image', this.imgHandler)
+    // 为图片ICON和视频ICON绑定事件  getModule 为编辑器的内部属性
+    this.$refs.myQuillEditor.quill.getModule('toolbar').addHandler('video', this.videoHandler);
+    this.$refs.myQuillEditor.quill.getModule('toolbar').addHandler('image', this.imgHandler);
   },
   computed:{
     qnLocation () {
@@ -99,13 +101,12 @@ export default {
     beforeUpload (file) {
       const suffix = file.name.split('.');
       const ext = suffix.splice(suffix.length - 1, 1)[0];
-      if (this.uploadType === 'image') {
-        //上传图片
         return this.$axios.get('/getToken')
           .then(rs => {
             if(rs.data.code==='1'){
+              let key = this.uploadType === 'image' ? `image_${suffix.join('.')}_${new Date().getTime()}.${ext}` : `video_${suffix.join('.')}_${new Date().getTime()}.${ext}`
               this.$set(this.uploadData, 'token', rs.data.data.token);
-              this.$set(this.uploadData, 'key', `image_${suffix.join('.')}_${new Date().getTime()}.${ext}`);
+              this.$set(this.uploadData, 'key', key);
             }else{
               self.$message.error(res.data.description);
             }
@@ -113,33 +114,35 @@ export default {
           .catch(e=>{
             this.$message({type: 'error', message: e.message});
           })
-
-      } else if (this.uploadType === 'video') {
-        //上传视频
-      }
     },
     upScuccess (e, file, fileList) {
       let vm = this;
-      let url = '';
-      if (this.uploadType === 'image') {
-        url = `${this.imgDomain}/${e.key}`;
-      } else if (this.uploadType === 'video') {
-
-      }
-      if (url != null && url.length > 0) {
+      let url = `${this.imgDomain}/${e.key}`;
+      if (url !== null && url.length > 0) {
         vm.addRange = vm.$refs.myQuillEditor.quill.getSelection();
         vm.$refs.myQuillEditor.quill.insertEmbed(vm.addRange !== null ? vm.addRange.index : 0, vm.uploadType, url, null)   // 调用编辑器的 insertEmbed 方法，插入URL
       }else{
         this.$message({type: 'error', message: `${vm.uploadType}插入失败`});
       }
+      vm.$refs['upload'].clearFiles()    // 插入成功后清除input的内容
     },
+    // 点击图片ICON触发事件
     imgHandler (state) {
       this.addRange = this.$refs.myQuillEditor.quill.getSelection();
       if (state) {
         let fileInput = document.getElementById('imgInput');
         fileInput.click();
       }
-      this.uploadType = 'image'
+      this.uploadType = 'image';
+    },
+    // 点击视频ICON触发事件
+    videoHandler(state) {
+      this.addRange = this.$refs.myQuillEditor.quill.getSelection();
+      if (state) {
+        let fileInput = document.getElementById('imgInput');
+        fileInput.click() // 加一个触发事件
+      }
+      this.uploadType = 'video';
     },
     onEditorBlur(editor) {
       console.log('editor blur!', editor)
