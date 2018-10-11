@@ -35,11 +35,18 @@ module.exports = {
     baseURL: baseUrl,
     browserBaseURL: "/api"
   },
+  vue: {
+    config : {
+      silent: !isDev,
+      performance: isDev
+    }
+  },
   build: {
     extractCSS: true,
+    // analyze: isDev,
     // CDN 地址, 当运行 nuxt build 时，会将.nuxt/dist/目录的内容上传到CDN， '/_nuxt/'为默认值
     publicPath: publicPath,
-    maxChunkSize: 500000,
+    maxChunkSize: 300000,
     babel: {
       presets: [
         ['vue-app', {
@@ -58,6 +65,8 @@ module.exports = {
   },
   plugins: [
     '~plugins/element-ui',
+    // '~plugins/element-ui-1',
+    // '~plugins/element-ui-2',
     '~/plugins/prototype',
     { src: '~plugins/nuxt-quill-plugin.js', ssr: false }
   ]
