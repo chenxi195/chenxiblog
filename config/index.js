@@ -15,7 +15,7 @@ let config = {
   qiniu: {
     accessKey: 'g0-5YUfvhKhBl9M2CdjgP0d-eNpobBPiJxLINlSt',
     secretKey: 'sbZMwukT8jO9IQFXoAZmfXgtQbRM1sWmZrUnRN6b',
-    domain: isDev ? 'http://pgd2fb33r.bkt.clouddn.com' : 'http://chenxiblog.com',
+    domain: isDev ? 'http://pgd2fb33r.bkt.clouddn.com' : 'http://qn.chenxiblog.com',
     bucket: 'chenxi195'
   }
 };
