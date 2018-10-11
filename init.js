@@ -29,6 +29,9 @@ sequelize.sync({force: false})
   //   );
   // })
   .then(rs => {
+    return sequelize.query('ALTER TABLE Pages ADD COLUMN img varchar(1000) not null;')
+  })
+  .then(rs => {
     console.log('sequelize sync success');
     process.exit();
   })

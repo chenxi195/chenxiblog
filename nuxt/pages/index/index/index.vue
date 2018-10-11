@@ -8,7 +8,7 @@
                         <p class="summary">{{topObj.summary}}</p>
                         <div class="featured-image">
                             <a href="#" @click.prevent="goDetail(topObj.id)">
-                                <img class="img-responsive project-image" src="/img/project-featured.png" alt="project name" style="width: 100%" />
+                                <img class="img-responsive project-image" v-if="topObj.img" :src="topObj.img" alt="project name" style="width: 100%" />
                             </a>
                             <div class="ribbon">
                                 <div class="text">New</div>

@@ -25,6 +25,23 @@
                 <el-button type="text" id="imgInput">点击上传</el-button>
             </el-upload>
         </el-form-item>
+        <el-form-item label="上传封面" :label-width="formLabelWidth">
+            <a :href="form.img" v-if="form.img" target="_blank" style="margin-right:10px;">{{form.img}}</a>
+            <el-upload
+                    :action="qnLocation"
+                    :before-upload='beforeUpload'
+                    :data="uploadData"
+                    :on-success='upImgSuccess'
+                    :on-progress="handleProgress"
+                    ref="imgUpload"
+                    :show-file-list="false"
+                    style="display: inline-block"
+            >
+                <el-button type="primary" @click="imgClick" size="small" style="margin-right: 10px;">{{form.img ? '重新上传' : '点击上传'}}</el-button>
+            </el-upload>
+            <el-button v-if="form.img" type="danger" size="small" @click="deleteImg" style="margin-right: 10px;">删除</el-button>
+            <span v-if="progress&& !form.img">{{progress}}%</span>
+        </el-form-item>
         <el-form-item label="文章内容" prop="content" :label-width="formLabelWidth" class="editor-container">
             <!--<div class="quill-editor" style="height: 300px;overflow-y: auto;"-->
                  <!--:content="form.content"-->
@@ -85,7 +102,8 @@ export default {
         title: this.data.title || '',
         summary: this.data.summary || '',
         content: this.data.content || '',
-        id: this.data.id || null
+        id: this.data.id || null,
+        img: this.data.img || ''
       },
       uploadType: '',
       addRange: [],
@@ -94,10 +112,27 @@ export default {
         key: ''
       },
       photoUrl: '',
-      imgDomain: 'http://qn.chenxiblog.com'
+      imgDomain: 'http://qn.chenxiblog.com',
+      progress: 0
     }
   },
   methods: {
+    imgClick () {
+      this.uploadType = 'image';
+    },
+    upImgSuccess (e, file, fileList) {
+      let vm = this;
+      let url = `${this.imgDomain}/${e.key}`;
+      this.form.img = url;
+      vm.$refs['imgUpload'].clearFiles()
+    },
+    handleProgress(event, file, fileList){
+      this.progress = event.percent;
+    },
+    deleteImg () {
+      this.progress = 0;
+      this.$set(this.form, 'img', '');
+    },
     beforeUpload (file) {
       const suffix = file.name.split('.');
       const ext = suffix.splice(suffix.length - 1, 1)[0];

@@ -8,6 +8,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       comment: '概述'
     },
+    img: {
+      type: DataTypes.STRING,
+      comment: '封面图'
+    },
     type: {
       type:DataTypes.BIGINT(11),
       defaultValue: 1,

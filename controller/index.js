@@ -44,6 +44,7 @@ const saveOrUpdatePage = (req, res, next) => {
   model.summary = body.summary;
   model.content = body.content;
   model.type = body.type || 1;
+  model.img = body.img || '';
 
   if(body.id){
     pageProxy.updateById(body.id, model)
@@ -91,7 +92,7 @@ const getBaseInfo = (req, res, next) => {
 const getTopPage = (req, res, next) => {
   pageProxy.findOne({
     where: {status: 1, top: 2},
-    attributes: ['id', 'created_at', 'summary', 'title']
+    attributes: ['id', 'created_at', 'summary', 'title', 'img']
   })
     .then(rs => {
       res.json(rs);
@@ -108,9 +109,9 @@ const getPageList = (req, res, next) => {
   };
 
   if(req.originalUrl.indexOf('/api/getAdminPageList') > -1) {
-    params.attributes = ['id', 'created_at', 'summary', 'title', 'content', 'top'];
+    params.attributes = ['id', 'created_at', 'summary', 'title', 'content', 'top', 'img'];
   }else{
-    params.attributes = ['id', 'created_at', 'summary', 'title'];
+    params.attributes = ['id', 'created_at', 'summary', 'title', 'img'];
   }
 
   if(query.title){
