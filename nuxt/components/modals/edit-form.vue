@@ -94,7 +94,7 @@ export default {
         key: ''
       },
       photoUrl: '',
-      imgDomain: '/pgd/imgs'
+      imgDomain: 'http://qn.chenxiblog.com'
     }
   },
   methods: {
