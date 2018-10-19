@@ -1,15 +1,22 @@
-export const state = function () {
-  return {
+import Vue from 'vue'
+import Vuex from 'vuex';
 
-  }
-};
+Vue.use(Vuex);
 
-export const mutations = {
-  nuxtServerInit ({commit}, {req, res}) {
+const store = () => new Vuex.Store({
+  state: {
+    tab: 'home',
+    subTab: 'user'
+  },
+  mutations: {
+    changeTab (state, obj){
+      Vue.set(state, "tab", obj.tab);
+    },
+    changeSubTab (state, obj){
+      Vue.set(state, "subTab", obj.subTab);
+    }
+  },
+  actions: {}
+});
 
-  }
-};
-
-export const actions = {
-
-};
+export default store

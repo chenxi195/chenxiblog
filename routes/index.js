@@ -4,6 +4,7 @@
 const express = require('express');
 const router = express.Router();
 const controller = require('../controller');
+const qzController = require('../controller/qzcontroller');
 
 router.get('/getAdminPageList',  controller.getPageList);
 router.get('/getPageList',  controller.getPageList);
@@ -19,5 +20,8 @@ router.post('/createOrSavePage',  controller.saveOrUpdatePage);
 router.post('/deletePage',  controller.deletePage);
 router.post('/loginSubmit',  controller.loginSubmit);
 
+
+
+router.post('/qzSubmit',  qzController.qzSubmit);
 
 module.exports = router;
