@@ -13,24 +13,12 @@
                     <span>取证信息</span>
                 </div>
                 <el-form ref="form" :model="form" label-width="80px" class="qzdetail-from">
-                    <el-form-item label="网址地址">
-                         http://baidu.com
-                    </el-form-item>
-                    <el-form-item label="网页标题">
-                        全景网__中国领先的图片库和图片素材网站
-                    </el-form-item>
-                    <el-form-item label="取证时间" style="margin-top: 20px;">
-                        2018-10-16  11:06:26  568
-                    </el-form-item>
-                    <el-form-item label="网页IP">
-                        220.181.111.188
-                    </el-form-item>
-                    <el-form-item label="网站备案">
-                        渝ICP备10202274-4号
-                    </el-form-item>
-                    <el-form-item label="浏览器">
-                        谷歌浏览器v.180926
-                    </el-form-item>
+                    <el-form-item label="网址地址">{{data.url}}</el-form-item>
+                    <el-form-item label="网页标题">{{data.title}}</el-form-item>
+                    <el-form-item label="取证时间" style="margin-top: 20px;">{{data.qztime}}</el-form-item>
+                    <el-form-item label="网页IP">{{data.ip}}</el-form-item>
+                    <el-form-item label="网站备案">{{data.beian}}</el-form-item>
+                    <el-form-item label="浏览器">{{data.browser}}</el-form-item>
                     <el-form-item label="证据名称" style="margin-bottom: 20px;">
                         <el-input v-model="form.name"></el-input>
                     </el-form-item>
@@ -43,7 +31,7 @@
                         </el-checkbox-group>
                     </el-form-item>
                     <el-form-item label="">
-                        <el-button type="primary" @click.prevent="qzHandle">点击生成证据</el-button>
+                        <el-button type="primary" @click.prevent="qzHandle" :loading="btnLoading">点击生成证据</el-button>
                     </el-form-item>
                 </el-form>
             </div>
@@ -62,11 +50,19 @@
 <script>
 
 export default {
+  async asyncData({app, req, query}){
+    let param = req ? req.query.url : query.url;
+    let {data} = await app.$axios.get('/getQzdetail', {params: {url: param}});
+    return {
+      data: data.data ? data.data : {},
+    }
+  },
   mounted () {
     this.$store.commit('changeTab', {tab: 'qz'});
   },
   data () {
     return {
+      btnLoading: false,
       stepActive: 0,
       desc1: '',
       desc2: '',
@@ -77,17 +73,22 @@ export default {
       form: {
         name: '',
         note: '',
-        type: 0
+        type: true
       }
     }
   },
   methods: {
     qzHandle () {
       let vm = this;
+      if(!vm.form.name){
+        return this.$message.error('请输入证据名称');
+      }
+      vm.btnLoading = true;
       setTimeout(function () {
         vm.stepActive = 1;
         vm.desc1 = '上链成功！';
         vm.icon1 = 'el-icon-upload';
+        vm.btnLoading = false;
       }, 1000);
       setTimeout(function () {
         vm.stepActive = 2;
@@ -101,7 +102,7 @@ export default {
       }, 3000);
       setTimeout(function () {
         vm.$router.push('/baoquan/user/quzheng')
-      },3500);
+      },4000);
     }
   }
 }

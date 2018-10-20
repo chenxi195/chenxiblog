@@ -23,5 +23,6 @@ router.post('/loginSubmit',  controller.loginSubmit);
 
 
 router.post('/qzSubmit',  qzController.qzSubmit);
+router.get('/getQzdetail',  qzController.getQzdetail);
 
 module.exports = router;
