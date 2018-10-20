@@ -5,34 +5,16 @@
             <el-breadcrumb-item :to="{ path: '/baoquan/user' }">个人中心</el-breadcrumb-item>
             <el-breadcrumb-item>我的出证</el-breadcrumb-item>
         </el-breadcrumb>
-        <el-table
-                :data="tableData"
-                stripe
-                border
-                class="bq-table">
-            <el-table-column
-                    prop="id"
-                    label="出证编号"
-                    width="180">
+        <el-table :data="list" stripe border class="bq-table">
+            <el-table-column prop="id" label="出证编号"></el-table-column>
+            <el-table-column prop="origin" label="存证来源"></el-table-column>
+            <el-table-column prop="jiguan" label="出证机关"></el-table-column>
+            <el-table-column label="创建日期">
+                <template slot-scope="scope">
+                    <span>{{momentFormat(scope.row['create_at'])}}</span>
+                </template>
             </el-table-column>
-            <el-table-column
-                    prop="origin"
-                    label="存证来源"
-                    width="180">
-            </el-table-column>
-            <el-table-column
-                    prop="from"
-                    label="出证机关"
-                    width="180">
-            </el-table-column>
-            <el-table-column
-                    prop="time"
-                    label="创建日期">
-            </el-table-column>
-            <el-table-column
-                    prop="status"
-                    label="出证状态">
-            </el-table-column>
+            <el-table-column prop="status" label="状态"></el-table-column>
             <el-table-column label="操作">
                 <template slot-scope="scope">
                     <div><el-button type="text" @click="dialogLog(scope.row.id)">查看日志</el-button></div>
@@ -66,6 +48,12 @@
 </template>
 <script>
 export default {
+  async asyncData({app, req, query}){
+    let {data} = await app.$axios.get('/getCzlist');
+    return {
+      list: data.data ? data.data : {}
+    }
+  },
   mounted () {
     this.$store.commit('changeTab', {tab: 'user'});
     this.$store.commit('changeSubTab', {subTab: 'chuzheng'});

@@ -2,6 +2,7 @@
 // const path = require('path');
 const qzProxy = require('../db/qz');
 const zpProxy = require('../db/zp');
+const czProxy = require('../db/cz');
 const {successJson, errorJson} = require("../util");
 
 // const qzSubmit = (req, res, next) => {
@@ -89,10 +90,56 @@ const getZplist = (req, res, next) => {
       res.json(rs);
     })
 };
+const getZpListByZsid = (req, res, next) => {
+  let no = req.query.zsid;
+  zpProxy.findAll({where: {no: no}})
+    .then(rs =>{
+      res.json(rs);
+    })
+};
 
 const updateZpdetail = (req, res, next) => {
   let query = req.body;
   zpProxy.updateById(query.id, query)
+    .then(rs =>{
+      res.json(rs);
+    })
+};
+
+const getZpdetail = (req, res, next) => {
+  let id = req.query.id;
+  zpProxy.findById(id)
+    .then(rs =>{
+      res.json(rs);
+    })
+};
+
+
+const setCzData = (req, res, next) => {
+  let query =req.body;
+  czProxy.create(query)
+    .then(rs =>{
+      res.json(rs);
+    })
+};
+const getCzlist = (req, res, next) => {
+  czProxy.findAll({})
+    .then(rs =>{
+      res.json(rs);
+    })
+};
+
+const updateCzdetail = (req, res, next) => {
+  let query = req.body;
+  czProxy.updateById(query.id, query)
+    .then(rs =>{
+      res.json(rs);
+    })
+};
+
+const getCzdetail = (req, res, next) => {
+  let id = req.query.id;
+  czProxy.findById(id)
     .then(rs =>{
       res.json(rs);
     })
@@ -106,5 +153,11 @@ module.exports = {
   getQzlist,
   setZpData,
   getZplist,
-  updateZpdetail
+  updateZpdetail,
+  getZpdetail,
+  setCzData,
+  getCzlist,
+  updateCzdetail,
+  getCzdetail,
+  getZpListByZsid
 };

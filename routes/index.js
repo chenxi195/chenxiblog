@@ -27,8 +27,14 @@ router.get('/getQzlist',  qzController.getQzlist);
 router.get('/getQzdetail',  qzController.getQzdetail);
 router.get('/setMockData',  qzController.setMockData);
 router.get('/getZplist',  qzController.getZplist);
+router.get('/getZpdetail',  qzController.getZpdetail);
+router.get('/getCzdetail',  qzController.getCzdetail);
+router.get('/getCzlist',  qzController.getCzlist);
+router.get('/getZpListByZsid',  qzController.getZpListByZsid);
 router.post('/updateQzdetail',  qzController.updateQzdetail);
+router.post('/updateCzdetail',  qzController.updateCzdetail);
 router.post('/setZpData',  qzController.setZpData);
 router.post('/updateZpdetail',  qzController.updateZpdetail);
+router.post('/setCzData',  qzController.setCzData);
 
 module.exports = router;

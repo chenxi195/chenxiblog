@@ -18,7 +18,7 @@
             <el-table-column label="操作">
                 <template slot-scope="scope">
                     <div v-if="scope.row.status==='未保全'"><el-button type="text" @click="toApply(scope.row.id)">申请保全</el-button></div>
-                    <div v-if="scope.row.status==='保全中'"><a :href="`/baoquan/bqpom?id=${scope.row.id}`" target="_blank"><el-button type="text">查看保全证书</el-button></a></div>
+                    <div v-if="scope.row.status==='保全中'"><a :href="`/baoquan/bqpom?zpid=${scope.row.id}`" target="_blank"><el-button type="text">查看保全证书</el-button></a></div>
                 </template>
             </el-table-column>
         </el-table>
@@ -38,19 +38,7 @@ export default {
   },
   data () {
     return {
-      tableData: [{
-        id: 1,
-        name: '证据名称1',
-        content: '取证内容',
-        time: '2018-10-10 09:36:56',
-        status: '未保全'
-      },{
-        id: 2,
-        name: '证据名称1',
-        content: '取证内容',
-        time: '2018-10-10 09:36:56',
-        status: '保全中'
-      }]
+
     }
   },
   methods: {

@@ -21,7 +21,7 @@
                 <el-input type="textarea" v-model="form.desc"></el-input>
             </el-form-item>
             <el-form-item label="送检文件">
-                <el-button type="text" disabled>存证信息.zip</el-button>
+                <a :href="data.imgUrl" target="_blank"><el-button type="text">{{data.imgUrl}}</el-button></a>
             </el-form-item>
             <el-form-item label="" style="text-align: center" label-width="0px">
                 <el-button type="warning" style="width: 50%" @click="nextStep">确认申请</el-button>
@@ -32,19 +32,56 @@
 </template>
 <script>
 export default {
+  async asyncData({app, req, query}){
+    let zpid = req ? req.query.zpid : query.zpid;
+    let id = req ? req.query.id : query.id;
+    let url = zpid ? '/getZpdetail' : '/getQzdetail';
+    let params = zpid ? {id: zpid} : {id: id};
+    let {data} = await app.$axios.get(url, {params: params});
+    return {
+      data: data.data ? data.data : {},
+      zpid: zpid,
+      id: id
+    }
+  },
   mounted () {
     this.$store.commit('changeTab', {tab: 'fuwu'});
   },
   data () {
     return {
       form: {
-        type: '版权争议'
+        type: '版权争议',
+        zpid: 0,
+        id: 0,
+        desc: ''
       }
     }
   },
   methods: {
     nextStep () {
-      this.$router.push('/baoquan/czapply2')
+      let model = {
+        no: this.data.no,
+        origin: this.zpid ? 'Cale' : '全景网',
+        jiguan: '福建中证司法鉴定中心',
+        type: this.form.type,
+        desc: this.form.desc,
+        imgUrl: this.data.imgUrl,
+        status: '申请中'
+      };
+
+      this.$axios.post('/setCzData', model)
+        .then(rs => {
+          if(rs.data.success){
+            if(this.id){
+              this.$router.push(`/baoquan/czapply2?id=${this.id}`)
+            }else{
+              this.$router.push(`/baoquan/czapply2?zpid=${this.zpid}`)
+            }
+          }else{
+            this.$message.error(rs.data.description)
+          }
+        })
+
     }
   }
 }

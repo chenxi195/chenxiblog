@@ -9,9 +9,37 @@
 </template>
 <script>
   export default {
+    beforeRouteEnter (to, from, next) {
+      next(vm => {
+        vm.zpid = to.query.zpid || 0;
+        vm.id = to.query.id || 0;
+      })
+    },
+    data () {
+      return {
+        zpid: 0,
+        id: 0
+      }
+    },
     methods: {
       nextStep () {
-        this.$router.push('/baoquan/czapply6')
+        let model = {
+          id: this.id || this.zpid,
+          status: '受理中'
+        };
+
+        this.$axios.post('/updateCzdetail', model)
+          .then(rs => {
+            if(rs.data.success){
+              if(this.id){
+                this.$router.push(`/baoquan/czapply6?id=${this.id}`)
+              }else{
+                this.$router.push(`/baoquan/czapply6?zpid=${this.zpid}`)
+              }
+            }else{
+              this.$message.error(rs.data.description)
+            }
+          })
       }
     }
   }

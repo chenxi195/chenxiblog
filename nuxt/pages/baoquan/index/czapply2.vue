@@ -26,22 +26,31 @@
 </template>
 <script>
   export default {
+    beforeRouteEnter (to, from, next) {
+      next(vm => {
+        vm.zpid = to.query.zpid || 0;
+        vm.id = to.query.id || 0;
+      })
+    },
     mounted () {
       this.$store.commit('changeTab', {tab: 'fuwu'});
     },
     data () {
       return {
-        form: {
-          type: '版权争议'
-        }
+        zpid: 0,
+        id: 0
       }
     },
     methods: {
       cancelSq () {
-        this.$router.push('/baoquan/czapply')
+        this.$router.back();
       },
       sureSq () {
-        this.$router.push('/baoquan/czapply3')
+        if(this.id){
+          this.$router.push(`/baoquan/czapply3?id=${this.id}`)
+        }else{
+          this.$router.push(`/baoquan/czapply3?zpid=${this.zpid}`)
+        }
       }
     }
   }

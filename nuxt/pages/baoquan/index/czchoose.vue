@@ -67,6 +67,12 @@
 </template>
 <script>
 export default {
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      vm.zpid = to.query.zpid || 0;
+      vm.id = to.query.id || 0;
+    })
+  },
     mounted () {
       this.$store.commit('changeTab', {tab: 'fuwu'});
     },
@@ -74,12 +80,18 @@ export default {
       return {
         rate1: 4,
         rate2: 5,
-        type: true
+        type: true,
+        zpid: 0,
+        id: 0
       }
     },
     methods: {
       toApply () {
-        this.$router.push('/baoquan/czapply')
+        if(this.id){
+          this.$router.push(`/baoquan/czapply?id=${this.id}`)
+        }else{
+          this.$router.push(`/baoquan/czapply?zpid=${this.zpid}`)
+        }
       }
     }
 

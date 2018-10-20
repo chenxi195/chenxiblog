@@ -43,7 +43,7 @@
                 </el-col>
             </el-row>
             <div class="fuwu-input-box">
-                <el-input v-model="form.content" placeholder="请输入内容"></el-input>
+                <el-input v-model="form.content" placeholder="请输入保全证书编号"></el-input>
                 <el-button type="warning" class="fuwu-btn" @click="toCzchoose">申请出证</el-button>
             </div>
         </div>
@@ -63,7 +63,14 @@ export default {
   },
   methods: {
     toCzchoose () {
-      this.$router.push(`/baoquan/czchoose?id=${this.form.content}`);
+      this.$axios.get('/getZpListByZsid', {params: {zsid: this.form.content}})
+        .then(rs => {
+          if(rs.data.success && rs.data.data.length){
+            this.$router.push(`/baoquan/czchoose?zpid=${rs.data.data[0].id}`);
+          }else{
+            this.$message.error('未查找到相应存证作品');
+          }
+        });
     }
   }
 }

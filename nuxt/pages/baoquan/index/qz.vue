@@ -10,7 +10,7 @@
             <div class="qz-box">
                 <div class="qz-input-box">
                     <div class="qz-input-left">
-                        <input type="text" v-model="url" placeholder="请输入您想要取证的网址， 例如：http://www.quanjing.com/"/>
+                        <input type="text" v-model="url" @keyup.enter="qzClick" placeholder="请输入您想要取证的网址， 例如：http://www.quanjing.com/"/>
                     </div>
                     <div class="qz-input-right">
                         <a href="javascript:;" @click.prevent="qzClick" class="qz-link">{{qzText}}</a>

@@ -4,7 +4,7 @@
             <el-breadcrumb-item :to="{ path: '/baoquan' }">首页</el-breadcrumb-item>
             <el-breadcrumb-item :to="{ path: '/baoquan/user' }">个人中心</el-breadcrumb-item>
             <el-breadcrumb-item :to="{path: '/baoquan/user/quzheng'}">我的取证</el-breadcrumb-item>
-            <el-breadcrumb-item>存证信息</el-breadcrumb-item>
+            <el-breadcrumb-item>取证信息</el-breadcrumb-item>
         </el-breadcrumb>
 
         <el-collapse v-model="activeNames" @change="handleChange">

@@ -8,15 +8,15 @@
             <div class="bqpom-content">
                 <div style="margin-top: 50px;">
                     <span class="bqpom-content-left">保全编号: </span>
-                    <span class="bqpom-content-right">234234456456</span>
+                    <span class="bqpom-content-right" v-text="data.no"></span>
                 </div>
                 <div>
                     <span class="bqpom-content-left">存证名称: </span>
-                    <span class="bqpom-content-right">xxx图片</span>
+                    <span class="bqpom-content-right">{{data.zjname || data.title}}</span>
                 </div>
                 <div>
                     <span class="bqpom-content-left">存证类型: </span>
-                    <span class="bqpom-content-right">摄影图片</span>
+                    <span class="bqpom-content-right">图片</span>
                 </div>
                 <div>
                     <span class="bqpom-content-left">证书持有人: </span>
@@ -32,7 +32,7 @@
                 </div>
                 <div>
                     <span class="bqpom-content-left">统一社会信用代码: </span>
-                    <span class="bqpom-content-right">123002</span>
+                    <span class="bqpom-content-right">SH998840483455SE</span>
                 </div>
                 <div>
                     <span class="bqpom-content-left">保全来源: </span>
@@ -40,12 +40,8 @@
                 </div>
 
                 <div>
-                    <span class="bqpom-content-left">保全时间: </span>
-                    <span class="bqpom-content-right">2018年10月10日  09:00:12  768</span>
-                </div>
-                <div>
-                    <span class="bqpom-content-left">有效期至: </span>
-                    <span class="bqpom-content-right">2023年10月10日</span>
+                    <span class="bqpom-content-left">提保时间: </span>
+                    <span class="bqpom-content-right">{{momentFormat(data['create_at'])}}</span>
                 </div>
                 <div>
                     <span class="bqpom-content-left">数字指纹: </span>
@@ -76,6 +72,16 @@
 </template>
 <script>
 export default {
+  async asyncData({app, req, query}){
+    let zpid = req ? req.query.zpid : query.zpid;
+    let id = req ? req.query.id : query.id;
+    let url = zpid ? '/getZpdetail' : '/getQzdetail';
+    let params = zpid ? {id: zpid} : {id: id};
+    let {data} = await app.$axios.get(url, {params: params});
+    return {
+      data: data.data ? data.data : {}
+    }
+  },
   beforeRouteEnter (to, from, next) {
     next(vm => {
       vm.zpid = to.query.zpid || 0;
@@ -88,6 +94,49 @@ export default {
       id: 0
     }
   },
+//  watch: {
+//    zpid (val) {
+//      this.$axios.get('/getZpdetail', {params: {id: this.zpid}})
+//        .then(rs => {
+//          if(rs.data.success){
+//            Object.assign(this.data, rs.data.data);
+//          }else{
+//            this.$message.error(rs.data.description);
+//          }
+//        })
+//    },
+//    id (id) {
+//      this.$axios.get('/getQzdetail', {params: {id: this.id}})
+//        .then(rs => {
+//          if(rs.data.success){
+//            Object.assign(this.data, rs.data.data);
+//          }else{
+//            this.$message.error(rs.data.description);
+//          }
+//        })
+//    }
+//  },
+//  mounted () {
+//    if(this.zpid){
+//        this.$axios.get('/getZpdetail', {params: {id: this.zpid}})
+//          .then(rs => {
+//            if(rs.data.success){
+//              Object.assign(this.data, rs.data.data);
+//            }else{
+//              this.$message.error(rs.data.description);
+//            }
+//          })
+//    }else if(this.id){
+//      this.$axios.get('/getQzdetail', {params: {id: this.id}})
+//        .then(rs => {
+//          if(rs.data.success){
+//            Object.assign(this.data, rs.data.data);
+//          }else{
+//            this.$message.error(rs.data.description);
+//          }
+//        })
+//    }
+//  },
   methods: {
     toCzapply () {
       if(this.id){

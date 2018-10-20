@@ -6,7 +6,7 @@
             <el-breadcrumb-item>我的取证</el-breadcrumb-item>
         </el-breadcrumb>
         <el-table :data="list" stripe border class="bq-table">
-            <el-table-column prop="id" label="存证编号"></el-table-column>
+            <el-table-column prop="id" label="取证编号"></el-table-column>
             <el-table-column prop="zjname" label="证据名称"></el-table-column>
             <el-table-column prop="desc" label="证据备注" width="180"></el-table-column>
             <el-table-column label="取证时间">
@@ -23,7 +23,7 @@
                                 <el-button type="text">查看保全证书</el-button>
                             </a>
                         </div>
-                        <div><el-button type="text" @click="toInfo(scope.row.id)">查看存证信息</el-button></div>
+                        <div><el-button type="text" @click="toInfo(scope.row.id)">查看取证信息</el-button></div>
                         <div><el-button type="text" @click="toCzchoose(scope.row.id)">申请出证</el-button></div>
                     </div>
                 </template>
