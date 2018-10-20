@@ -20,6 +20,7 @@
                     :before-upload='beforeUpload'
                     :data="uploadData"
                     :on-success='upScuccess'
+                    :show-file-list="false"
                     ref="upload"
             >
                 <el-button type="text" id="imgInput">点击上传</el-button>
@@ -34,7 +35,6 @@
                     :on-success='upImgSuccess'
                     :on-progress="handleProgress"
                     ref="imgUpload"
-                    :show-file-list="false"
                     style="display: inline-block"
             >
                 <el-button type="primary" @click="imgClick" size="small" style="margin-right: 10px;">{{form.img ? '重新上传' : '点击上传'}}</el-button>

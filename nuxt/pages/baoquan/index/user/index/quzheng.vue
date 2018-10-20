@@ -14,8 +14,7 @@
                     <span>{{momentFormat(scope.row['create_at'])}}</span>
                 </template>
             </el-table-column>
-            <el-table-column prop="status" label="状态">
-            </el-table-column>
+            <el-table-column prop="status" label="状态"></el-table-column>
             <el-table-column label="操作" class="bq-btns">
                 <template slot-scope="scope">
                     <div v-if="scope.row.status === '保全中'">

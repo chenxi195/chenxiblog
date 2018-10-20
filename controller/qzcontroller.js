@@ -1,6 +1,7 @@
 // const execSync = require('child_process').execSync;
 // const path = require('path');
 const qzProxy = require('../db/qz');
+const zpProxy = require('../db/zp');
 const {successJson, errorJson} = require("../util");
 
 // const qzSubmit = (req, res, next) => {
@@ -62,7 +63,7 @@ const updateQzdetail = (req, res, next) => {
     zjname: query.zjname,
     desc:query.desc
   };
-  qzProxy.updateById(query.id, model)
+  qzProxy.updateById(query.id, query)
     .then(rs =>{
       res.json(rs);
     })
@@ -75,10 +76,35 @@ const getQzlist = (req, res, next) => {
     })
 };
 
+const setZpData = (req, res, next) => {
+  let query =req.body;
+  zpProxy.create(query)
+    .then(rs =>{
+      res.json(rs);
+    })
+};
+const getZplist = (req, res, next) => {
+  zpProxy.findAll({})
+    .then(rs =>{
+      res.json(rs);
+    })
+};
+
+const updateZpdetail = (req, res, next) => {
+  let query = req.body;
+  zpProxy.updateById(query.id, query)
+    .then(rs =>{
+      res.json(rs);
+    })
+};
+
 module.exports = {
   // qzSubmit,
   getQzdetail,
   setMockData,
   updateQzdetail,
-  getQzlist
+  getQzlist,
+  setZpData,
+  getZplist,
+  updateZpdetail
 };

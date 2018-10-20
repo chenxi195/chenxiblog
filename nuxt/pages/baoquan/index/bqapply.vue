@@ -27,7 +27,7 @@
                         <div class="cz-content-right">
                             <p>法律效力</p>
                             <p><el-rate v-model="rate1"></el-rate></p>
-                            <p><a href="/baoquan/bqpom" target="_blank"><el-button type="warning" style="margin-top: 70px;">点击申请</el-button></a> </p>
+                            <p><a :href="`/baoquan/bqpom?zpid=${zpid}`" target="_blank"><el-button type="warning" @click="applyBq" style="margin-top: 70px;">点击申请</el-button></a> </p>
                         </div>
                     </el-col>
                 </el-row>
@@ -37,18 +37,37 @@
 </template>
 <script>
   export default {
+    beforeRouteEnter (to, from, next) {
+      next(vm => {
+        vm.zpid = to.query.id || 1;
+      })
+    },
     mounted () {
       this.$store.commit('changeTab', {tab: 'fuwu'});
     },
     data () {
       return {
+        zpid: 0,
         rate1: 4,
         rate2: 5,
         type: true
       }
     },
     methods: {
-
+      applyBq () {
+        let model = {
+          id: this.zpid,
+          status: '保全中'
+        };
+        this.$axios.post('/updateZpdetail', model)
+          .then(rs => {
+            if(rs.data.success){
+              this.$router.push('/baoquan/user');
+            }else{
+              this.$message.error(rs.data.description);
+            }
+          })
+      }
     }
 
 

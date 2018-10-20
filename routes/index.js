@@ -26,6 +26,9 @@ router.post('/loginSubmit',  controller.loginSubmit);
 router.get('/getQzlist',  qzController.getQzlist);
 router.get('/getQzdetail',  qzController.getQzdetail);
 router.get('/setMockData',  qzController.setMockData);
+router.get('/getZplist',  qzController.getZplist);
 router.post('/updateQzdetail',  qzController.updateQzdetail);
+router.post('/setZpData',  qzController.setZpData);
+router.post('/updateZpdetail',  qzController.updateZpdetail);
 
 module.exports = router;

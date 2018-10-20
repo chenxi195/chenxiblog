@@ -76,9 +76,25 @@
 </template>
 <script>
 export default {
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      vm.zpid = to.query.zpid || 0;
+      vm.id = to.query.id || 0;
+    })
+  },
+  data () {
+    return {
+      zpid: 0,
+      id: 0
+    }
+  },
   methods: {
     toCzapply () {
-      this.$router.push('/baoquan/czchoose')
+      if(this.id){
+        this.$router.push(`/baoquan/czchoose?id=${this.id}`)
+      }else{
+        this.$router.push(`/baoquan/czchoose?zpid=${this.zpid}`)
+      }
     }
   }
 }

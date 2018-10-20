@@ -8,16 +8,24 @@
         </div>
         <div class="cz-upload">
             <el-upload
+                    v-if="!progress"
                     class="upload-demo"
                     drag
-                    action="https://jsonplaceholder.typicode.com/posts/"
-                    :on-success="handleUpload"
-                    :on-error="handleUpload"
+                    :action="qnLocation"
+                    :data="uploadData"
+                    :before-upload='beforeUpload'
+                    :on-success="upCzImgSuccess"
+                    :show-file-list="false"
+                    :on-progress="handleProgress"
+                    ref="imgUpload"
                     multiple>
                 <i class="el-icon-upload"></i>
                 <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
                 <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
             </el-upload>
+            <div v-if="progress" style="text-align: center;">
+               完成进度: {{progress}}%
+            </div>
         </div>
         <div class="cz-steps-box">
             <el-steps :active="stepActive" align-center>
@@ -96,9 +104,20 @@ export default {
   mounted () {
     this.$store.commit('changeTab', {tab: 'cunzheng'});
   },
+  computed:{
+    qnLocation () {
+        return 'http://upload.qiniup.com';
+    }
+  },
   data () {
     return {
+      uploadData: {
+        token: '',
+        key: ''
+      },
+      progress: 0,
       stepActive : 0,
+      imgDomain: 'http://qn.chenxiblog.com',
       desc1: '',
       desc2: '',
       desc3: '',
@@ -108,26 +127,63 @@ export default {
     }
   },
   methods: {
-    handleUpload () {
+    handleProgress (event) {
+      this.progress = event.percent;
+    },
+    beforeUpload (file) {
+      const suffix = file.name.split('.');
+      const ext = suffix.splice(suffix.length - 1, 1)[0];
+      return this.$axios.get('/getToken')
+        .then(rs => {
+          if(rs.data.code==='1'){
+            let key = `image_${suffix.join('.')}_${new Date().getTime()}.${ext}`;
+            this.$set(this.uploadData, 'token', rs.data.data.token);
+            this.$set(this.uploadData, 'key', key);
+          }else{
+            self.$message.error(res.data.description);
+          }
+        })
+        .catch(e=>{
+          this.$message({type: 'error', message: e.message});
+        })
+    },
+    upCzImgSuccess (e, file, fileList) {
       let vm = this;
-      setTimeout(function () {
-        vm.stepActive = 1;
-        vm.desc1 = '上链成功！';
-        vm.icon1 = 'el-icon-upload';
-      }, 1000);
-      setTimeout(function () {
-        vm.stepActive = 2;
-        vm.desc2 = '上链成功！';
-        vm.icon2 = 'el-icon-upload';
-      }, 2000);
-      setTimeout(function () {
-        vm.stepActive = 3;
-        vm.desc3 = '上链成功！';
-        vm.icon3 = 'el-icon-upload';
-      }, 3000);
-      setTimeout(function () {
-        vm.$router.push('/baoquan/user')
-      },3500);
+      let url = `${this.imgDomain}/${e.key}`;
+//      vm.$refs['imgUpload'].clearFiles();
+      vm.progress = 0;
+      let model = {
+        no: parseInt(Math.random()*10000000),
+        title: e.key,
+        imgUrl: url,
+        status: '未保全',
+        desc: '图片作品'
+      };
+      vm.$axios.post('/setZpData', model)
+        .then(rs => {
+          if(rs.data.success){
+            setTimeout(function () {
+              vm.stepActive = 1;
+              vm.desc1 = '上链成功！';
+              vm.icon1 = 'el-icon-upload';
+            }, 1000);
+            setTimeout(function () {
+              vm.stepActive = 2;
+              vm.desc2 = '上链成功！';
+              vm.icon2 = 'el-icon-upload';
+            }, 2000);
+            setTimeout(function () {
+              vm.stepActive = 3;
+              vm.desc3 = '上链成功！';
+              vm.icon3 = 'el-icon-upload';
+            }, 3000);
+            setTimeout(function () {
+              vm.$router.push('/baoquan/user')
+            },3500);
+          }else{
+            vm.$message.error(rs.data.description);
+          }
+        })
     }
   }
 }
