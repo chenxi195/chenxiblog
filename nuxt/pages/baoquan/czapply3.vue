@@ -2,7 +2,7 @@
     <div>
         <div class="czapply3-outer">
             <div class="czapply3-header"></div>
-            <img src="http://qn.chenxiblog.com/1.png"></div>
+            <img src="http://qn.chenxiblog.com/1.png">
             <a href="javascript:;" @click="nextStep" class="czapply3-next-step"></a>
         </div>
     </div>
@@ -22,7 +22,7 @@ export default {
 .czapply3-next-step {
     position: absolute;
     z-index: 1000;
-    left: 600px;
+    left: 350px;
     top: 435px;
     width: 400px;
     height: 40px;

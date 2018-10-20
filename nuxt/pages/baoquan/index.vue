@@ -8,7 +8,6 @@
                     class="bq-menu"
                     mode="horizontal"
                     router
-                    @select="handleSelect"
                     background-color="#545c64"
                     text-color="#fff"
                     active-text-color="#ffd04b">
@@ -20,7 +19,7 @@
             </el-menu>
         </el-col>
         <el-col :span="4" class="bq-user">
-            <el-button type="info" icon="el-icon-service" size="mini" circle></el-button> <span class="bq-username">userName</span>
+            <el-button type="info" icon="el-icon-service" size="mini" circle></el-button> <span class="bq-username">Cale</span>
         </el-col>
     </el-row>
     <nuxt/>
@@ -53,9 +52,6 @@ export default {
         .catch(e=>{
           console.log(e)
         })
-    },
-    handleSelect(key, keyPath) {
-        console.log(key, keyPath);
     }
   }
 }

@@ -22,7 +22,10 @@ router.post('/loginSubmit',  controller.loginSubmit);
 
 
 
-router.post('/qzSubmit',  qzController.qzSubmit);
+// router.post('/qzSubmit',  qzController.qzSubmit);
+router.get('/getQzlist',  qzController.getQzlist);
 router.get('/getQzdetail',  qzController.getQzdetail);
+router.get('/setMockData',  qzController.setMockData);
+router.post('/updateQzdetail',  qzController.updateQzdetail);
 
 module.exports = router;

@@ -2,9 +2,9 @@
     <div>
         <div class="czapply3-outer" style="background-color: #f6f6f6;height: 1468px;">
             <div class="czapply3-header"></div>
-            <img src="http://qn.chenxiblog.com/3.png"></div>
-        <a href="javascript:;" @click="nextStep" class="czapply5-next-step"></a>
-    </div>
+            <img src="http://qn.chenxiblog.com/3.png">
+            <a href="javascript:;" @click="nextStep" class="czapply5-next-step"></a>
+        </div>
     </div>
 </template>
 <script>
@@ -20,7 +20,7 @@
     .czapply5-next-step {
         position: absolute;
         z-index: 1000;
-        left: 700px;
+        left: 450px;
         top: 1370px;
         width: 200px;
         height: 40px;

@@ -148,7 +148,7 @@ export default {
         let vm = this;
         vm.qzText = '取证中...';
         setTimeout(function () {
-          vm.$router.push(`/baoquan/qzdetail?url=${encodeURIComponent(vm.url)}`);
+          vm.$router.push('/baoquan/qzdetail?id=1');
         }, 2000);
       }else{
         this.$message.error('请输入网站链接');

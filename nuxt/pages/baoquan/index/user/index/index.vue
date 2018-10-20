@@ -36,7 +36,7 @@
             <el-table-column label="操作">
                 <template slot-scope="scope">
                     <div v-if="scope.row.status==='未保全'"><el-button type="text" @click="toApply(scope.row.id)">申请保全</el-button></div>
-                    <div v-if="scope.row.status==='保全中'"><el-button type="text" @click="toPom(scope.row.id)">查看保全证书</el-button></div>
+                    <div v-if="scope.row.status==='保全中'"><a :href="`/baoquan/bqpom?id=${scope.row.id}`" target="_blank"><el-button type="text">查看保全证书</el-button></a></div>
                 </template>
             </el-table-column>
         </el-table>
@@ -66,9 +66,6 @@ export default {
     }
   },
   methods: {
-    toPom (id) {
-      this.$router.push(`/baoquan/bqpom?id=${id}`);
-    },
     toApply(id){
       this.$router.push(`/baoquan/bqapply?id=${id}`);
     }

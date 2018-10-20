@@ -9,8 +9,8 @@ sequelize.authenticate()
   });
 
 const Page = sequelize.import('./db/page/pagemodel');
+const Qz = sequelize.import('./db/qz/qzmodel');
 
-console.log('NODE_ENV: ', process.env.NODE_ENV);
 
 sequelize.sync({force: false})
   // .then(rs => {
@@ -28,9 +28,9 @@ sequelize.sync({force: false})
   //       "JOIN user AS U2 ON P.editor_id=U2.id "
   //   );
   // })
-  .then(rs => {
-    return sequelize.query('ALTER TABLE Pages ADD COLUMN img varchar(1000) not null;')
-  })
+  // .then(rs => {
+  //   return sequelize.query('ALTER TABLE Pages ADD COLUMN img varchar(1000) not null;')
+  // })
   .then(rs => {
     console.log('sequelize sync success');
     process.exit();

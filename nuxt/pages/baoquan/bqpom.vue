@@ -67,6 +67,7 @@
                 <div class="bqpom-content-ps">
                     <span class="bqpom-content-left">3.若需要验证电子数据的保全时间及内容的完整性，可凭此证书在baoquan.zbj.com进行验证。</span>
                 </div>
+                <div style="text-align: right;width: 90%;"><img src="/img/bq/yz.png" width="130"/> </div>
             </div>
         </div>
         <div style="text-align: center;"><el-button @click="toCzapply()">申请出证</el-button></div>

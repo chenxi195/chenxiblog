@@ -2,8 +2,8 @@
     <div class="cz-outer">
         <div class="cz-choose-outer">
             <el-steps :active="0" finish-status="success" class="cz-steps">
-                <el-step title="步骤 1" description="选择出证类型"></el-step>
-                <el-step title="步骤 2" description="出证结果"></el-step>
+                <el-step title="步骤 1" description="申请保全"></el-step>
+                <el-step title="步骤 2" description="查看保全证书"></el-step>
             </el-steps>
             <div style="width: 90%;margin: 0 auto;">
                 <h3>保全是什么？</h3>
@@ -19,13 +19,15 @@
                     <el-col :span="14" style="border-right: 1px #f2f2f2 dashed;">
                         <p class="cz-content-1">保全证书</p>
                         <p>一份实时记录用户行为信息的存证文档。当出现纠纷时，可作为呈堂供证。</p>
-                        <p>出证机构：知识工作者维权平台 <el-checkbox class="cz-content-checkbox" label="我同意 《保全用户须知》" name="type"></el-checkbox></p>
+                        <p>&nbsp;</p>
+                        <p>出证机构：知识工作者维权平台</p>
+                        <p><el-checkbox v-model="type" label="我同意 《知识工作者维权平台用户须知》" name="type"></el-checkbox></p>
                     </el-col>
                     <el-col :span="6">
                         <div class="cz-content-right">
                             <p>法律效力</p>
                             <p><el-rate v-model="rate1"></el-rate></p>
-                            <p><el-button type="warning" style="margin-top: 70px;" @click="toApply()">点击申请</el-button></p>
+                            <p><a href="/baoquan/bqpom" target="_blank"><el-button type="warning" style="margin-top: 70px;">点击申请</el-button></a> </p>
                         </div>
                     </el-col>
                 </el-row>
@@ -41,13 +43,12 @@
     data () {
       return {
         rate1: 4,
-        rate2: 5
+        rate2: 5,
+        type: true
       }
     },
     methods: {
-      toApply () {
-        this.$router.push('/baoquan/bqpom')
-      }
+
     }
 
 

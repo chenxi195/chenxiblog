@@ -3,7 +3,7 @@
     <el-row :gutter="30">
         <el-col :span="14">
             <div class="qzdetail-img-box">
-                <img class="qzdetail-img" src="/img/1539870431354.png"/>
+                <img class="qzdetail-img" :src="data.imgUrl"/>
             </div>
         </el-col>
         <el-col :span="10">
@@ -15,18 +15,18 @@
                 <el-form ref="form" :model="form" label-width="80px" class="qzdetail-from">
                     <el-form-item label="网址地址">{{data.url}}</el-form-item>
                     <el-form-item label="网页标题">{{data.title}}</el-form-item>
-                    <el-form-item label="取证时间" style="margin-top: 20px;">{{data.qztime}}</el-form-item>
+                    <el-form-item label="取证时间" style="margin-top: 20px;">{{momentFormat(data['created_at'])}}</el-form-item>
                     <el-form-item label="网页IP">{{data.ip}}</el-form-item>
                     <el-form-item label="网站备案">{{data.beian}}</el-form-item>
                     <el-form-item label="浏览器">{{data.browser}}</el-form-item>
                     <el-form-item label="证据名称" style="margin-bottom: 20px;">
-                        <el-input v-model="form.name"></el-input>
+                        <el-input v-model="form.zjname"></el-input>
                     </el-form-item>
                     <el-form-item label="证据备注" style="margin-bottom: 20px;">
-                        <el-input type="textarea" v-model="form.note"></el-input>
+                        <el-input type="textarea" v-model="form.desc"></el-input>
                     </el-form-item>
                     <el-form-item label="" style="margin-bottom: 20px;">
-                        <el-checkbox-group v-model="form.type">
+                        <el-checkbox-group v-model="type">
                             <el-checkbox label="我同意 《知识工作者维权平台用户须知》" name="type"></el-checkbox>
                         </el-checkbox-group>
                     </el-form-item>
@@ -51,10 +51,15 @@
 
 export default {
   async asyncData({app, req, query}){
-    let param = req ? req.query.url : query.url;
-    let {data} = await app.$axios.get('/getQzdetail', {params: {url: param}});
+    let id = id ? req.query.id : query.id;
+    let {data} = await app.$axios.get('/getQzdetail', {params: {id: id}});
     return {
       data: data.data ? data.data : {},
+      form: {
+        id: data.data.id,
+        zjname: '',
+        desc: '',
+      }
     }
   },
   mounted () {
@@ -70,39 +75,45 @@ export default {
       icon1: '',
       icon2: '',
       icon3: '',
-      form: {
-        name: '',
-        note: '',
-        type: true
-      }
+      type: true
     }
   },
   methods: {
     qzHandle () {
       let vm = this;
-      if(!vm.form.name){
-        return this.$message.error('请输入证据名称');
+      if(!vm.form.zjname){
+        return vm.$message.error('请输入证据名称');
       }
       vm.btnLoading = true;
-      setTimeout(function () {
-        vm.stepActive = 1;
-        vm.desc1 = '上链成功！';
-        vm.icon1 = 'el-icon-upload';
-        vm.btnLoading = false;
-      }, 1000);
-      setTimeout(function () {
-        vm.stepActive = 2;
-        vm.desc2 = '上链成功！';
-        vm.icon2 = 'el-icon-upload';
-      }, 2000);
-      setTimeout(function () {
-        vm.stepActive = 3;
-        vm.desc3 = '上链成功！';
-        vm.icon3 = 'el-icon-upload';
-      }, 3000);
-      setTimeout(function () {
-        vm.$router.push('/baoquan/user/quzheng')
-      },4000);
+
+      vm.$axios.post('/updateQzdetail', vm.form)
+        .then(rs => {
+          if(rs.data.success){
+            setTimeout(function () {
+              vm.stepActive = 1;
+              vm.desc1 = '上链成功！';
+              vm.icon1 = 'el-icon-upload';
+              vm.btnLoading = false;
+            }, 1000);
+            setTimeout(function () {
+              vm.stepActive = 2;
+              vm.desc2 = '上链成功！';
+              vm.icon2 = 'el-icon-upload';
+            }, 2000);
+            setTimeout(function () {
+              vm.stepActive = 3;
+              vm.desc3 = '上链成功！';
+              vm.icon3 = 'el-icon-upload';
+            }, 3000);
+            setTimeout(function () {
+              vm.$router.push('/baoquan/user/quzheng')
+            },4000);
+          }else{
+            vm.$message.error(rs.data.description);
+          }
+        });
+
+
     }
   }
 }
