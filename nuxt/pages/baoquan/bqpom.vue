@@ -66,7 +66,7 @@
                 <div style="text-align: right;width: 90%;"><img src="/img/bq/yz.png" width="130"/> </div>
             </div>
         </div>
-        <div style="text-align: center;"><el-button @click="toCzapply()">申请出证</el-button></div>
+        <div style="text-align: center;padding-bottom: 20px;"><el-button type="primary" @click="toCzapply()">申请出证</el-button></div>
     </div>
 
 </template>

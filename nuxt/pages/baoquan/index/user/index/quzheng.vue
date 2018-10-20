@@ -24,15 +24,34 @@
                             </a>
                         </div>
                         <div><el-button type="text" @click="toInfo(scope.row.id)">查看取证信息</el-button></div>
+                        <div><el-button type="text" @click="zpDiff(scope.row)">对比作品</el-button></div>
                         <div><el-button type="text" @click="toCzchoose(scope.row.id)">申请出证</el-button></div>
                     </div>
                 </template>
             </el-table-column>
         </el-table>
 
+        <el-dialog title="对比作品" :visible.sync="dialogVisible" :close-on-click-modal="false">
+            <zp-diff :data="currentItem" ref="zpDiff"></zp-diff>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogVisible = false">取 消</el-button>
+                <el-button type="primary" @click="handleDiff" :loading="btnLoading">确 定</el-button>
+            </div>
+        </el-dialog>
+
+        <el-dialog title="对比结果" :visible.sync="dialogVisible2" :close-on-click-modal="false">
+            <zp-diff-result :data="currentItem" :currentRow="selectedDiff" ref="zpDiff"></zp-diff-result>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogVisible2 = false">取 消</el-button>
+                <el-button type="primary" @click="dialogVisible2 = false">确 定</el-button>
+            </div>
+        </el-dialog>
     </div>
+
 </template>
 <script>
+  import zpDiff from '~/components/modals/zp-diff.vue';
+  import zpDiffResult from '~/components/modals/zp-diff-result.vue';
 export default {
   async asyncData({app, req, query}){
     let {data} = await app.$axios.get('/getQzlist');
@@ -40,19 +59,21 @@ export default {
       list: data.data ? data.data : {}
     }
   },
+  components: {
+    zpDiff,
+    zpDiffResult
+  },
   mounted () {
     this.$store.commit('changeTab', {tab: 'user'});
     this.$store.commit('changeSubTab', {subTab: 'quzheng'});
   },
   data () {
     return {
-      tableData: [{
-        id: 1,
-        name: '证据名称1',
-        content: '取证内容',
-        time: '2018-10-10 09:36:56',
-        status: '保全中'
-      }]
+      btnLoading: false,
+      dialogVisible: false,
+      dialogVisible2: false,
+      currentItem: null,
+      selectedDiff: null
     }
   },
   methods: {
@@ -61,6 +82,20 @@ export default {
     },
     toInfo (id) {
       this.$router.push(`/baoquan/user/czinfo?id=${id}`);
+    },
+    zpDiff (obj) {
+        this.currentItem = obj;
+        this.dialogVisible = true;
+    },
+    handleDiff () {
+        this.selectedDiff = this.$refs['zpDiff'].currentRow;
+        if(!this.selectedDiff){
+          this.$message.error('请选择一个比对作品');
+        }else{
+          this.dialogVisible2 = true;
+          this.dialogVisible = false;
+        }
+
     }
   }
 }
