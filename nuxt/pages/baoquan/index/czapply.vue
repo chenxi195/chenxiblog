@@ -72,11 +72,7 @@ export default {
       this.$axios.post('/setCzData', model)
         .then(rs => {
           if(rs.data.success){
-            if(this.id){
-              this.$router.push(`/baoquan/czapply2?id=${this.id}`)
-            }else{
-              this.$router.push(`/baoquan/czapply2?zpid=${this.zpid}`)
-            }
+            this.$router.push(`/baoquan/czapply2?czid=${rs.data.data.id}`);
           }else{
             this.$message.error(rs.data.description)
           }

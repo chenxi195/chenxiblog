@@ -58,7 +58,7 @@ export default {
       this.$router.push(`/baoquan/user/czapplyinfo?id=${id}`);
     },
     toApplyAgain (id) {
-      this.$router.push(`/baoquan/czapply2?id=${id}`);
+      this.$router.push(`/baoquan/czapply2?czid=${id}`);
     },
     toApplyProgress (id) {
       this.$router.push(`/baoquan/czapply7?id=${id}`);

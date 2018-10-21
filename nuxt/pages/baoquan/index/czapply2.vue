@@ -28,8 +28,7 @@
   export default {
     beforeRouteEnter (to, from, next) {
       next(vm => {
-        vm.zpid = to.query.zpid || 0;
-        vm.id = to.query.id || 0;
+        vm.czid = to.query.czid || 0;
       })
     },
     mounted () {
@@ -37,8 +36,7 @@
     },
     data () {
       return {
-        zpid: 0,
-        id: 0
+        czid: 0
       }
     },
     methods: {
@@ -46,11 +44,7 @@
         this.$router.back();
       },
       sureSq () {
-        if(this.id){
-          this.$router.push(`/baoquan/czapply3?id=${this.id}`)
-        }else{
-          this.$router.push(`/baoquan/czapply3?zpid=${this.zpid}`)
-        }
+        this.$router.push(`/baoquan/czapply3?czid=${this.czid}`)
       }
     }
   }

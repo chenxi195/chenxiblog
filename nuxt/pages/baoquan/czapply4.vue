@@ -11,23 +11,17 @@
   export default {
     beforeRouteEnter (to, from, next) {
       next(vm => {
-        vm.zpid = to.query.zpid || 0;
-        vm.id = to.query.id || 0;
+        vm.czid = to.query.czid || 0;
       })
     },
     data () {
       return {
-        zpid: 0,
-        id: 0
+        czid: 0
       }
     },
     methods: {
       nextStep () {
-        if(this.id){
-          this.$router.push(`/baoquan/czapply5?id=${this.id}`)
-        }else{
-          this.$router.push(`/baoquan/czapply5?zpid=${this.zpid}`)
-        }
+        this.$router.push(`/baoquan/czapply5?czid=${this.czid}`)
       }
     }
   }

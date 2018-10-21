@@ -11,31 +11,25 @@
   export default {
     beforeRouteEnter (to, from, next) {
       next(vm => {
-        vm.zpid = to.query.zpid || 0;
-        vm.id = to.query.id || 0;
+        vm.czid = to.query.czid || 0;
       })
     },
     data () {
       return {
-        zpid: 0,
-        id: 0
+        czid: 0
       }
     },
     methods: {
       nextStep () {
         let model = {
-          id: this.id || this.zpid,
+          id: this.czid,
           status: '受理中'
         };
 
         this.$axios.post('/updateCzdetail', model)
           .then(rs => {
             if(rs.data.success){
-              if(this.id){
-                this.$router.push(`/baoquan/czapply6?id=${this.id}`)
-              }else{
-                this.$router.push(`/baoquan/czapply6?zpid=${this.zpid}`)
-              }
+              this.$router.push(`/baoquan/czapply6?czid=${this.czid}`)
             }else{
               this.$message.error(rs.data.description)
             }
