@@ -9,6 +9,10 @@
                         background-color="#d3dce6"
                         text-color="#606266"
                         active-text-color="#000">
+                    <el-menu-item index="info"  :route="{path: '/baoquan/user/info'}">
+                        <i class="el-icon-service"></i>
+                        <span slot="title">个人信息</span>
+                    </el-menu-item>
                     <el-menu-item index="user"  :route="{path: '/baoquan/user'}">
                         <i class="el-icon-menu"></i>
                         <span slot="title">我的作品</span>

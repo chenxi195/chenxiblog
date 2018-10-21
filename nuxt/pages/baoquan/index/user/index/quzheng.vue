@@ -23,7 +23,7 @@
                                 <el-button type="text">查看保全证书</el-button>
                             </a>
                         </div>
-                        <div><el-button type="text" @click="toInfo(scope.row.id)">查看取证信息</el-button></div>
+                        <div><el-button type="text" @click="toInfo(scope.row)">查看取证信息</el-button></div>
                         <div><el-button type="text" @click="zpDiff(scope.row)">对比作品</el-button></div>
                         <div><el-button type="text" @click="toCzchoose(scope.row.id)">申请出证</el-button></div>
                     </div>
@@ -80,8 +80,8 @@ export default {
     toCzchoose (id) {
       this.$router.push(`/baoquan/czchoose?id=${id}`);
     },
-    toInfo (id) {
-      this.$router.push(`/baoquan/user/czinfo?id=${id}`);
+    toInfo (obj) {
+      this.$router.push(`/baoquan/user/czinfo?id=${obj.id}&img=${obj.imgUrl}`);
     },
     zpDiff (obj) {
         this.currentItem = obj;

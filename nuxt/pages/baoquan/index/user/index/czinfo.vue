@@ -44,6 +44,7 @@
             </el-collapse-item>
             <el-collapse-item title="内容附件" name="5">
                 <el-button type="text" disabled>IMG009342.png</el-button>
+                <!--<a :href="imgUrl" target="_blank"></a><el-button type="text">{{imgUrl}}</el-button></a>-->
             </el-collapse-item>
             <el-collapse-item title="其他内容" name="6">
                 <div>无</div>
@@ -53,6 +54,12 @@
 </template>
 <script>
   export default {
+    beforeRouteEnter (to, from, next) {
+      next(vm => {
+        vm.id = to.query.id || 0;
+        vm.imgUrl = to.query.img || 0;
+      })
+    },
     mounted () {
       this.$store.commit('changeTab', {tab: 'user'});
       this.$store.commit('changeSubTab', {subTab: 'quzheng'});
