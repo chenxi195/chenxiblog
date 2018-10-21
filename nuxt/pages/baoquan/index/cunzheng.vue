@@ -150,8 +150,6 @@ export default {
     upCzImgSuccess (e, file, fileList) {
       let vm = this;
       let url = `${this.imgDomain}/${e.key}`;
-//      vm.$refs['imgUpload'].clearFiles();
-      vm.progress = 0;
       let model = {
         no: parseInt(Math.random()*10000000),
         title: e.key,

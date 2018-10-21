@@ -33,9 +33,15 @@ sequelize.sync({force: false})
   // .then(rs => {
   //   return sequelize.query('ALTER TABLE Pages ADD COLUMN img varchar(1000) not null;')
   // })
-  // .then(rs => {
-  //   return sequelize.query('DELETE from Qzs where id = 1')
-  // })
+  .then(rs => {
+    return sequelize.query('DELETE from Qzs')
+  })
+  .then(rs => {
+    return sequelize.query('DELETE from Zps')
+  })
+  .then(rs => {
+    return sequelize.query('DELETE from Czs')
+  })
   .then(rs => {
     console.log('sequelize sync success');
     process.exit();

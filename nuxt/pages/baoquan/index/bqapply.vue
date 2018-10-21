@@ -48,8 +48,7 @@
     data () {
       return {
         zpid: 0,
-        rate1: 4,
-        rate2: 5,
+        rate1: 5,
         type: true
       }
     },
