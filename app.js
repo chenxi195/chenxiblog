@@ -10,6 +10,7 @@ const routes = require('./routes/index');
 const app = express();
 const {Nuxt, Builder} = require('nuxt');
 const {getDownloadUrl} = require('./util');
+const compression = require('compression');
 
 app.use(favicon(path.join(__dirname, 'fav.ico')));
 app.use(logger('dev'));
@@ -19,6 +20,7 @@ app.use(bodyParser.json({
 app.use(bodyParser.urlencoded({ extended: false,limit: '20488kb'}));
 app.use(cookieParser());
 app.use(session({secret:"keyboard cat", resave: false, saveUninitialized: true, cookie: { maxAge: 60*1000*10 }}));
+app.use(compression());
 app.use('/admin', function (req, res, next) {
   if(req.session.userPWD && req.session.userPWD === sessionConfig.password){
     next();
